@@ -6,7 +6,7 @@
 
 ## Usage
 
-**Requires ESLint `>=8.23.0`.**
+**Requires ESLint `>=8.57.0`.**
 
 ### Install
 
@@ -24,17 +24,16 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 
 ```js
 // eslint.config.js
-import thinkbuff from '@thinkbuff/eslint-config'
+import { defineFlatConfig } from '@thinkbuff/eslint-config'
 import { FlatCompat } from '@eslint/eslintrc';
 
 const compat = new FlatCompat();
 
-export default [
-  ...
+export default defineFlatConfig([
   {
-    ignore: [],
-  },
-  thinkbuff.configs.flat,
+    astro: true,
+    unocss: true,
+  }
   // Legacy config
   ...compat.config({
     extends: [
@@ -43,23 +42,23 @@ export default [
     ],
   }),
   // Other flat configs...
-]
+])
 ```
 
 #### CommonJS
 
 ```js
 // eslint.config.js
-const thinkbuff = require('@thinkbuff/eslint-config').default
+const { defineFlatConfig } = require('@thinkbuff/eslint-config').default
 const { FlatCompat } = require('@eslint/eslintrc')
 
 const compat = new FlatCompat()
 
-module.exports = [
+module.exports = defineFlatConfig([
   {
-    ignore: [],
-  },
-  thinkbuff.configs.flat,
+    astro: true,
+    unocss: true,
+  }
   // Legacy config
   ...compat.config({
     extends: [
@@ -68,7 +67,7 @@ module.exports = [
     ],
   }),
   // Other flat configs...
-]
+])
 ```
 
 ### Add script for package.json
