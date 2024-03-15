@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.2
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.1...v0.0.2)
+
+### 🏡 Chore
+
+- Add peerDependencies to devDependencies ([1d9003b](https://github.com/thinkbuff/eslint-config/commit/1d9003b))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.0.1
 
 
