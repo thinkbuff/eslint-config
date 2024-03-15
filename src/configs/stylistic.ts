@@ -9,7 +9,7 @@ export interface StylisticOptions extends Omit<StylisticCustomizeOptions, 'flat'
   overrides?: Partial<StylisticRules>;
 }
 
-export const DefaultStylisticOptions: StylisticOptions = {
+const DefaultStylisticOptions: StylisticOptions = {
   indent: 2,
   jsx: true,
   quotes: 'single',

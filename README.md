@@ -29,7 +29,8 @@ import { FlatCompat } from '@eslint/eslintrc';
 
 const compat = new FlatCompat();
 
-export default defineFlatConfig([
+export default defineFlatConfig(
+  // Configures for Thinkbuff's config
   {
     astro: true,
     unocss: true,
@@ -42,19 +43,20 @@ export default defineFlatConfig([
     ],
   }),
   // Other flat configs...
-])
+)
 ```
 
 #### CommonJS
 
 ```js
 // eslint.config.js
-const { defineFlatConfig } = require('@thinkbuff/eslint-config').default
+const { defineFlatConfig } = require('@thinkbuff/eslint-config')
 const { FlatCompat } = require('@eslint/eslintrc')
 
 const compat = new FlatCompat()
 
-module.exports = defineFlatConfig([
+module.exports = defineFlatConfig(
+  // Configures for Thinkbuff's config
   {
     astro: true,
     unocss: true,
@@ -67,7 +69,7 @@ module.exports = defineFlatConfig([
     ],
   }),
   // Other flat configs...
-])
+)
 ```
 
 ### Add script for package.json
