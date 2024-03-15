@@ -30,6 +30,10 @@ export interface OptionsConfig {
   /**
    * Enable astro rules.
    *
+   * Requires installing:
+   * - `eslint-plugin-astro`
+   * - `eslint-plugin-jsx-a11y`
+   *
    * @default false
    */
   astro?: boolean | AstroOptions;

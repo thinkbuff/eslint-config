@@ -21,8 +21,8 @@
   },
   "sideEffects": false,
   "scripts": {
-    "build": "tsup --clean",
-    "dev": "tsup --watch & eslint-flat-config-viewer",
+    "build": "tsup --clean --dts",
+    "dev": "tsup --clean --watch & eslint-flat-config-viewer",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
@@ -66,6 +66,7 @@
     "eslint-flat-config-viewer": "^0.1.11",
     "eslint-plugin-astro": "^0.31.4",
     "eslint-plugin-jsx-a11y": "^6.8.0",
+    "jiti": "^1.21.0",
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.10.0",
     "tsup": "^8.0.2",
