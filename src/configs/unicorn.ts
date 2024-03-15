@@ -17,5 +17,11 @@ export async function unicorn(): Promise<ESLintFlatConfig<UnicornRules>[]> {
         'unicorn/no-null': 'off',
       },
     },
+    {
+      files: ['**/*.config.*'],
+      rules: {
+        'unicorn/prefer-top-level-await': 'off',
+      },
+    },
   ];
 }
