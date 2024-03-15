@@ -33,13 +33,12 @@ export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
             ],
             'pathGroups': [{ group: 'internal', pattern: '{{#,~}/,#}**' }],
             'pathGroupsExcludedImportTypes': ['type'],
-            'alphabetize': { order: 'asc', caseInsensitive: true },
           },
         ],
       } as unknown as Partial<ImportRules>,
     },
     {
-      files: ['**/*.config.*'],
+      files: ['**/*.config.*', '**/*.d.ts'],
       rules: {
         'import/no-default-export': 'off',
       } as unknown as Partial<ImportRules>,
