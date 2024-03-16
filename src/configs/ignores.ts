@@ -20,6 +20,7 @@ export async function ignores(): Promise<ESLintFlatConfig[]> {
         '**/.tmp',
         '**/.history',
         '**/.vitepress/cache',
+        '**/.nitro',
         '**/.nuxt',
         '**/.next',
         '**/.vercel',
