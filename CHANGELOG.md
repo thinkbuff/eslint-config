@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.4...v0.0.5)
+
+### 🚀 Enhancements
+
+- **unicorn/filename-case:** Ignore file-based routing when use `[param]` syntax ([7ffb5e8](https://github.com/thinkbuff/eslint-config/commit/7ffb5e8))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.0.4
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.3...v0.0.4)
