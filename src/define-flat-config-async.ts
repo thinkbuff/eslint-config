@@ -1,11 +1,14 @@
+import { isPackageExists } from 'local-pkg';
+
 import {
   ignores,
-  files,
   astro,
   stylistic,
   unicorn,
   unocss,
   imports,
+  javascript,
+  typescript,
   type StylisticOptions,
   type AstroOptions,
   type StylisticRules,
@@ -14,11 +17,13 @@ import {
   type UnocssOptions,
   type UnocssRules,
   type ImportRules,
+  type TypescriptOptions,
+  type TypescriptESlintRules,
 } from './configs';
 import type { Awaitable, ESLintFlatConfig, RulesRecord } from './types';
 import { resolveOptions } from './utils';
 
-export type Rules = RulesRecord | StylisticRules | AstroRules | UnicornRules | UnocssRules | ImportRules;
+export type Rules = RulesRecord | StylisticRules | TypescriptESlintRules | AstroRules | UnicornRules | UnocssRules | ImportRules;
 
 export interface DefineFlatConfigAsyncOptions {
   /**
@@ -27,6 +32,14 @@ export interface DefineFlatConfigAsyncOptions {
    * @default true
    */
   stylistic?: boolean | StylisticOptions;
+  /**
+   * Enable TypeScript support.
+   *
+   * Passing an object to enable TypeScript Language Server support.
+   *
+   * @default auto-detect based on the dependencies
+   */
+  typescript?: boolean | TypescriptOptions;
   /**
    * Enable astro rules.
    *
@@ -59,12 +72,16 @@ export async function defineFlatConfigAsync(
   options: DefineFlatConfigAsyncOptions = {},
   ...merges: Awaitable<ESLintFlatConfig<Rules>>[]
 ) {
-  const promises: Awaitable<ESLintFlatConfig<Rules>[]>[] = [ignores(), files(), unicorn(), imports()];
+  const promises: Awaitable<ESLintFlatConfig<Rules>[]>[] = [ignores(), javascript(), unicorn(), imports()];
 
   const stylisticOptions = resolveOptions(options.stylistic, {});
 
   if (stylisticOptions) {
     promises.push(stylistic(stylisticOptions));
+  }
+
+  if (options.typescript !== false && isPackageExists('typescript')) {
+    promises.push(typescript(resolveOptions(options.typescript)));
   }
 
   if (options.astro) {

@@ -6,7 +6,7 @@ import { resolveModule } from '../utils';
 
 import type { StylisticOptions, StylisticRules } from './stylistic';
 
-export type AstroBaseRules = {
+export interface AstroBaseRules {
   'astro/no-conflict-set-directives': RuleEntry;
   'astro/no-deprecated-astro-canonicalurl': RuleEntry;
   'astro/no-deprecated-astro-fetchcontent': RuleEntry;
@@ -23,7 +23,7 @@ export type AstroBaseRules = {
   'astro/semi': RuleEntry;
 };
 
-export type AstroJsxA11yRules = {
+export interface AstroJsxA11yRules {
   'astro/jsx-a11y/alt-text': RuleEntry;
   'astro/jsx-a11y/anchor-has-content': RuleEntry;
   'astro/jsx-a11y/anchor-is-valid': RuleEntry;
@@ -61,7 +61,7 @@ export type AstroJsxA11yRules = {
 
 export type AstroRules = AstroBaseRules & AstroJsxA11yRules;
 
-export type AstroOptions = {
+export interface AstroOptions {
   /**
    * An array of glob patterns indicating the files that the configuration object should apply to. If not specified, the configuration object applies to all files
    */

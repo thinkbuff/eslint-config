@@ -24,12 +24,12 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 
 ```js
 // eslint.config.js
-import { defineFlatConfig } from '@thinkbuff/eslint-config'
+import { defineFlatConfigAsync } from '@thinkbuff/eslint-config'
 import { FlatCompat } from '@eslint/eslintrc';
 
 const compat = new FlatCompat();
 
-export default defineFlatConfig(
+export default defineFlatConfigAsync(
   // Configures for Thinkbuff's config
   {
     astro: true,
@@ -50,12 +50,12 @@ export default defineFlatConfig(
 
 ```js
 // eslint.config.js
-const { defineFlatConfig } = require('@thinkbuff/eslint-config')
+const { defineFlatConfigAsync } = require('@thinkbuff/eslint-config')
 const { FlatCompat } = require('@eslint/eslintrc')
 
 const compat = new FlatCompat()
 
-module.exports = defineFlatConfig(
+module.exports = defineFlatConfigAsync(
   // Configures for Thinkbuff's config
   {
     astro: true,
