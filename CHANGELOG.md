@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.3...v0.0.4)
+
+### 🚀 Enhancements
+
+- **ignores:** Add `**/*.nitro` ([fd41e2d](https://github.com/thinkbuff/eslint-config/commit/fd41e2d))
+- **imports:** Add globs for `import/no-default-export` ([fde04f5](https://github.com/thinkbuff/eslint-config/commit/fde04f5))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.0.3
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.2...v0.0.3)
