@@ -15,6 +15,16 @@ export async function unicorn(): Promise<ESLintFlatConfig<UnicornRules>[]> {
         ...rules,
         'unicorn/prevent-abbreviations': 'off',
         'unicorn/no-null': 'off',
+        'unicorn/filename-case': [
+          'error',
+          {
+            cases: { kebabCase: true },
+            ignore: [
+              // ignore file-based routing when use `[param]` syntax , eg: [postId].get.ts or [postId].ts
+              /^\[\w+](\.*.*)?\.*.*$/,
+            ],
+          },
+        ],
       },
     },
     {
