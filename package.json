@@ -1,7 +1,7 @@
 {
   "name": "@thinkbuff/eslint-config",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Thinkbuff's ESLint config preset",
   "files": [
     "dist"
@@ -33,7 +33,7 @@
   "keywords": [
     "eslint-config"
   ],
-  "homepage": "https://github.com/thinkbuff/eslint-config",
+  "homepage": "https://github.com/thinkbuff/eslint-config/#readme",
   "author": "Eleven <eteplus@outlook.com>",
   "license": "MIT",
   "peerDependencies": {
