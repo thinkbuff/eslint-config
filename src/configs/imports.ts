@@ -1,5 +1,6 @@
 import type { RuleOptions as ImportRuleOptions } from '@eslint-types/import/types';
 
+import { GLOB_SRC, GLOB_SRC_EXT } from '../globs';
 import type { ESLintFlatConfig } from '../types';
 import { ImportPlugin } from '../plugins';
 
@@ -38,8 +39,16 @@ export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
       } as unknown as Partial<ImportRules>,
     },
     {
-      name: 'thinkbuff:imports:overrides',
-      files: ['**/*.config.*', '**/*.d.ts'],
+      name: 'thinkbuff:imports:disable-no-default-export',
+      plugins: {
+        import: ImportPlugin,
+      },
+      files: [
+        `**/*config*.${GLOB_SRC_EXT}`,
+        `**/{views,pages,routes,middleware,plugins,api}/${GLOB_SRC}`,
+        `**/{index,vite,esbuild,rollup,rolldown,webpack,rspack}.ts`,
+        '**/*.d.ts',
+      ],
       rules: {
         'import/no-default-export': 'off',
       } as unknown as Partial<ImportRules>,

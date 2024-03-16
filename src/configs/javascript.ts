@@ -1,5 +1,6 @@
 import globals from 'globals';
 
+import { GLOB_SRC, GLOB_SRC_EXT } from '../globs';
 import type { ESLintFlatConfig } from '../types';
 
 export async function javascript(): Promise<ESLintFlatConfig[]> {
@@ -31,7 +32,7 @@ export async function javascript(): Promise<ESLintFlatConfig[]> {
     },
     {
       name: 'thinkbuff:javascript:scripts-overrides',
-      files: ['scripts/**/*.?([cm])[jt]s?(x)', 'cli.?([cm])[jt]s?(x)'],
+      files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
       rules: {
         'no-console': 'off',
       },

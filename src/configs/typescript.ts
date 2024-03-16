@@ -2,6 +2,7 @@ import type { RuleOptions } from '@eslint-types/typescript-eslint/types';
 import tseslint from 'typescript-eslint';
 
 import type { ESLintFlatConfig, RulesRecord } from '../types';
+import { GLOB_TS, GLOB_TSX } from '../globs';
 
 export type TypescriptESlintRules = RuleOptions;
 
@@ -35,7 +36,7 @@ export async function typescript(options: TypescriptOptions = {}): Promise<ESLin
   return [
     {
       name: 'thinkbuff:typescript',
-      files: ['**/*.?([cm])ts', '**/*.?([cm])tsx'],
+      files: [GLOB_TS, GLOB_TSX],
       plugins: {
         '@typescript-eslint': tseslint.plugin,
       },
