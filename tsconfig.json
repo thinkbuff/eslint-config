@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
     "baseUrl": ".",
+    "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "strict": true,
@@ -10,5 +10,5 @@
     "noUnusedLocals": true,
     "declaration": true
   },
-  "include": ["src"]
+  "include": ["**/*.ts"]
 }

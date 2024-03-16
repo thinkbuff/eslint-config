@@ -18,6 +18,7 @@ export async function unicorn(): Promise<ESLintFlatConfig<UnicornRules>[]> {
       },
     },
     {
+      name: 'thinkbuff:unicorn:overrides',
       files: ['**/*.config.*'],
       rules: {
         'unicorn/prefer-top-level-await': 'off',

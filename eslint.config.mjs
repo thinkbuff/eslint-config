@@ -10,9 +10,9 @@ async function defineFlatConfigAsync(...args) {
   /**
    * @type {import('./src/index')}
    */
-  const { defineFlatConfig } = await JITI('./src/index.ts');
+  const m = await JITI('./src/index.ts');
 
-  return defineFlatConfig(...args);
+  return m.defineFlatConfigAsync(...args);
 }
 
 export default defineFlatConfigAsync();

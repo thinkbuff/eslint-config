@@ -1,9 +1,9 @@
-import type { RuleOptions } from '@eslint-types/import/types';
+import type { RuleOptions as ImportRuleOptions } from '@eslint-types/import/types';
 
-import { ImportPlugin } from '../plugins';
 import type { ESLintFlatConfig } from '../types';
+import { ImportPlugin } from '../plugins';
 
-export type ImportRules = RuleOptions;
+export type ImportRules = ImportRuleOptions;
 
 export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
   return [
@@ -38,6 +38,7 @@ export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
       } as unknown as Partial<ImportRules>,
     },
     {
+      name: 'thinkbuff:imports:overrides',
       files: ['**/*.config.*', '**/*.d.ts'],
       rules: {
         'import/no-default-export': 'off',
