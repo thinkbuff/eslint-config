@@ -1,6 +1,6 @@
 import type { RuleOptions } from '@eslint-types/unicorn/types';
+import UnicornPlugin from 'eslint-plugin-unicorn';
 
-import { UnicornPlugin } from '../plugins';
 import type { ESLintFlatConfig } from '../types';
 
 export type UnicornRules = RuleOptions;

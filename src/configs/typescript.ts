@@ -75,6 +75,15 @@ export async function typescript(options: TypescriptOptions = {}): Promise<ESLin
           'error',
           { allowBitwiseExpressions: true },
         ],
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            argsIgnorePattern: '^_',
+            varsIgnorePattern: '^_',
+            caughtErrorsIgnorePattern: '^_',
+            ignoreRestSiblings: true,
+          },
+        ],
         ...overrides,
       },
     },

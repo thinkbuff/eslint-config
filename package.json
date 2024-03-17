@@ -36,6 +36,9 @@
   "homepage": "https://github.com/thinkbuff/eslint-config/#readme",
   "author": "Eleven <eteplus@outlook.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@unocss/eslint-plugin": ">=0.58.5",
     "astro-eslint-parser": "^0.16.3",
@@ -79,6 +82,7 @@
     "@stylistic/eslint-plugin": "^1.6.3",
     "@typescript-eslint/parser": "^7.2.0",
     "eslint-plugin-i": "^2.29.1",
+    "eslint-plugin-perfectionist": "^2.7.0",
     "eslint-plugin-unicorn": "^51.0.1",
     "globals": "^14.0.0",
     "local-pkg": "^0.5.0",

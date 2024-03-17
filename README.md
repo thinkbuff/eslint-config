@@ -6,7 +6,8 @@
 
 ## Usage
 
-**Requires ESLint `>=8.57.0`.**
+- **Requires Node.js `>=18.18.0`.**
+- **Requires ESLint `>=8.57.0`.**
 
 ### Install
 
@@ -29,21 +30,26 @@ import { FlatCompat } from '@eslint/eslintrc';
 
 const compat = new FlatCompat();
 
-export default defineFlatConfigAsync(
-  // Configures for Thinkbuff's config
-  {
-    astro: true,
-    unocss: true,
-  }
-  // Legacy config
-  ...compat.config({
-    extends: [
-      'eslint:recommended',
-      // Other extends...
-    ],
-  }),
-  // Other flat configs...
-)
+export default defineFlatConfigAsync({
+  astro: true,
+  unocss: true,
+  // Additional ESlint Flat Config
+  extends: [
+    {
+      files: ['src/**/*.ts'],
+      rules: {
+        'perfectionist/sort-objects': 'error',
+      },
+    },
+    // Legacy config
+    ...compat.config({
+      extends: [
+        'eslint:recommended',
+        // Other extends...
+      ],
+    }),
+  ]
+}
 ```
 
 #### CommonJS
@@ -55,21 +61,26 @@ const { FlatCompat } = require('@eslint/eslintrc')
 
 const compat = new FlatCompat()
 
-module.exports = defineFlatConfigAsync(
-  // Configures for Thinkbuff's config
-  {
-    astro: true,
-    unocss: true,
-  }
-  // Legacy config
-  ...compat.config({
-    extends: [
-      'eslint:recommended',
-      // Other extends...
-    ],
-  }),
-  // Other flat configs...
-)
+module.exports = defineFlatConfigAsync({
+  astro: true,
+  unocss: true,
+  // Additional ESlint Flat Config
+  extends: [
+    {
+      files: ['src/**/*.ts'],
+      rules: {
+        'perfectionist/sort-objects': 'error',
+      },
+    },
+    // Legacy config
+    ...compat.config({
+      extends: [
+        'eslint:recommended',
+        // Other extends...
+      ],
+    }),
+  ]
+})
 ```
 
 ### Add script for package.json

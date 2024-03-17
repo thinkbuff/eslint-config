@@ -6,3 +6,4 @@ export * from './unicorn';
 export * from './unocss';
 export * from './imports';
 export * from './typescript';
+export * from './perfectionist';

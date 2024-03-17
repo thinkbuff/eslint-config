@@ -19,11 +19,19 @@ import {
   type ImportRules,
   type TypescriptOptions,
   type TypescriptESlintRules,
+  perfectionist,
 } from './configs';
 import type { Awaitable, ESLintFlatConfig, RulesRecord } from './types';
 import { resolveOptions } from './utils';
 
-export type Rules = RulesRecord | StylisticRules | TypescriptESlintRules | AstroRules | UnicornRules | UnocssRules | ImportRules;
+export type Rules =
+  | RulesRecord
+  | StylisticRules
+  | TypescriptESlintRules
+  | AstroRules
+  | UnicornRules
+  | UnocssRules
+  | ImportRules;
 
 export interface DefineFlatConfigAsyncOptions {
   /**
@@ -59,40 +67,54 @@ export interface DefineFlatConfigAsyncOptions {
    * @default false
    */
   unocss?: boolean | UnocssOptions;
+  /**
+   * perfectionist plugin for props and items sorting.
+   *
+   * @see https://github.com/azat-io/eslint-plugin-perfectionist
+   *
+   * @default true,
+   */
+  perfectionist?: boolean;
+  /**
+   * Additional ESlint Flat configuration.
+   *
+   * @default []
+   */
+  extends?: Awaitable<ESLintFlatConfig<Rules>>[];
 }
 
 /**
  * Defines a flat configuration asynchronously by merging different ESLint configurations.
  *
  * @param options - optional options to customize the configuration
- * @param merges - additional ESLint configurations to merge
  * @return a Promise that resolves to a flat ESLint configuration
  */
-export async function defineFlatConfigAsync(
-  options: DefineFlatConfigAsyncOptions = {},
-  ...merges: Awaitable<ESLintFlatConfig<Rules>>[]
-) {
-  const promises: Awaitable<ESLintFlatConfig<Rules>[]>[] = [ignores(), javascript(), unicorn(), imports()];
+export async function defineFlatConfigAsync(options: DefineFlatConfigAsyncOptions = {}) {
+  const configs: Awaitable<ESLintFlatConfig<Rules>[]>[] = [ignores(), javascript(), unicorn(), imports()];
 
   const stylisticOptions = resolveOptions(options.stylistic, {});
 
   if (stylisticOptions) {
-    promises.push(stylistic(stylisticOptions));
+    configs.push(stylistic(stylisticOptions));
   }
 
   if (options.typescript !== false && isPackageExists('typescript')) {
-    promises.push(typescript(resolveOptions(options.typescript)));
+    configs.push(typescript(resolveOptions(options.typescript)));
   }
 
   if (options.astro) {
-    promises.push(astro(resolveOptions(options.astro, { stylistic: stylisticOptions })));
+    configs.push(astro(resolveOptions(options.astro, { stylistic: stylisticOptions })));
   }
 
   if (options.unocss) {
-    promises.push(unocss(resolveOptions(options.unocss)));
+    configs.push(unocss(resolveOptions(options.unocss)));
   }
 
-  const configs = await Promise.all([...promises, ...merges]);
+  if (options.perfectionist !== false) {
+    configs.push(perfectionist());
+  }
 
-  return configs.flat();
+  const values = await Promise.all([...configs, ...(Array.isArray(options.extends) ? options.extends : [])]);
+
+  return values.flat();
 }
