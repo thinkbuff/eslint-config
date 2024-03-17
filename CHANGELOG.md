@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.6
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.5...v0.0.6)
+
+### 🚀 Enhancements
+
+- Add `eslint-plugin-perfectionist` and refactor `defineFlatConfigAsync` ([cb4c352](https://github.com/thinkbuff/eslint-config/commit/cb4c352))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.0.5
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.4...v0.0.5)
