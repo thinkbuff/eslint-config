@@ -7,8 +7,10 @@ import {
   unicorn,
   unocss,
   imports,
+  react,
   javascript,
   typescript,
+  perfectionist,
   type StylisticOptions,
   type AstroOptions,
   type StylisticRules,
@@ -17,9 +19,9 @@ import {
   type UnocssOptions,
   type UnocssRules,
   type ImportRules,
+  type ReactOptions,
   type TypescriptOptions,
   type TypescriptESlintRules,
-  perfectionist,
 } from './configs';
 import type { Awaitable, ESLintFlatConfig, RulesRecord } from './types';
 import { resolveOptions } from './utils';
@@ -35,21 +37,30 @@ export type Rules =
 
 export interface DefineFlatConfigAsyncOptions {
   /**
-   * Enable stylistic rules.
+   * Enable Stylistic rules.
    *
    * @default true
    */
   stylistic?: boolean | StylisticOptions;
   /**
-   * Enable TypeScript support.
-   *
-   * Passing an object to enable TypeScript Language Server support.
+   * Enable TypeScript ESlint rules.
    *
    * @default auto-detect based on the dependencies
    */
   typescript?: boolean | TypescriptOptions;
   /**
-   * Enable astro rules.
+   * Enable React rules.
+   *
+   * Requires installing:
+   * - `eslint-plugin-react`
+   * - `eslint-plugin-react-hooks`
+   * - `eslint-plugin-jsx-a11y`
+   *
+   * @default false
+   */
+  react?: boolean | ReactOptions;
+  /**
+   * Enable Astro rules.
    *
    * Requires installing:
    * - `eslint-plugin-astro`
@@ -59,7 +70,7 @@ export interface DefineFlatConfigAsyncOptions {
    */
   astro?: boolean | AstroOptions;
   /**
-   * Enable unocss rules.
+   * Enable Unocss rules.
    *
    * Requires installing:
    * - `@unocss/eslint-plugin`
@@ -90,16 +101,21 @@ export interface DefineFlatConfigAsyncOptions {
  * @return a Promise that resolves to a flat ESLint configuration
  */
 export async function defineFlatConfigAsync(options: DefineFlatConfigAsyncOptions = {}) {
-  const configs: Awaitable<ESLintFlatConfig<Rules>[]>[] = [ignores(), javascript(), unicorn(), imports()];
-
+  const enableTypescript = options.typescript !== false && isPackageExists('typescript');
   const stylisticOptions = resolveOptions(options.stylistic, {});
+
+  const configs: Awaitable<ESLintFlatConfig<Rules>[]>[] = [ignores(), javascript(), unicorn(), imports()];
 
   if (stylisticOptions) {
     configs.push(stylistic(stylisticOptions));
   }
 
-  if (options.typescript !== false && isPackageExists('typescript')) {
+  if (enableTypescript) {
     configs.push(typescript(resolveOptions(options.typescript)));
+  }
+
+  if (options.react) {
+    configs.push(react(resolveOptions(options.react, { typescript: enableTypescript })));
   }
 
   if (options.astro) {

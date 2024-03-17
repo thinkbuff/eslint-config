@@ -38,8 +38,16 @@ export async function stylistic(options: StylisticOptions = {}): Promise<ESLintF
       },
       rules: {
         ...rules,
+        '@stylistic/jsx-indent': [
+          'error',
+          2,
+          {
+            checkAttributes: false,
+            indentLogicalExpressions: true,
+          },
+        ],
         ...overrides,
       },
     },
-  ];
+  ] as ESLintFlatConfig<StylisticRules>[];
 }

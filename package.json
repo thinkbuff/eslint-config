@@ -44,7 +44,9 @@
     "astro-eslint-parser": "^0.16.3",
     "eslint": ">=8.57.0",
     "eslint-plugin-astro": "^0.31.4",
-    "eslint-plugin-jsx-a11y": "^6.8.0"
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0"
   },
   "peerDependenciesMeta": {
     "@unocss/eslint-plugin": {
@@ -58,6 +60,12 @@
     },
     "eslint-plugin-jsx-a11y": {
       "optional": true
+    },
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
     }
   },
   "devDependencies": {
@@ -69,6 +77,8 @@
     "eslint-flat-config-viewer": "^0.1.11",
     "eslint-plugin-astro": "^0.31.4",
     "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "jiti": "^1.21.0",
     "lint-staged": "^15.2.2",
     "simple-git-hooks": "^2.11.0",

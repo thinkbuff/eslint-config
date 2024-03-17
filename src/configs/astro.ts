@@ -1,5 +1,4 @@
 import globals from 'globals';
-import { createRequire } from 'node:module';
 
 import type { ESLintFlatConfig, RuleEntry } from '../types';
 import { resolveModule } from '../utils';
@@ -68,6 +67,7 @@ export interface AstroOptions {
   files?: ESLintFlatConfig['files'];
   /**
    * Enable eslint-plugin-jsx-ally
+   *
    * @default 'recommend'
    *
    * @see [eslint-plugin-astro#a11y-extension-rules](https://ota-meshi.github.io/eslint-plugin-astro/rules/#a11y-extension-rules)
@@ -96,16 +96,24 @@ export async function astro(
     overrides = {},
   } = options;
 
-  const [AstroPlugin, AstroParser, TsParser] = await Promise.all([
+  const [AstroPlugin, JsxA11yPlugin, AstroParser, TsParser] = await Promise.all([
     resolveModule(import('eslint-plugin-astro')),
+    resolveModule(import('eslint-plugin-jsx-a11y')),
     resolveModule(import('astro-eslint-parser')),
     resolveModule(import('@typescript-eslint/parser')),
   ]);
 
-  const require = createRequire(import.meta.url);
-
-  // @ts-expect-error
-  const jsxA11yRules = (a11y ? AstroPlugin.configs[`jsx-a11y-${a11y}`].rules : {}) as Partial<AstroJsxA11yRules>;
+  const rules = {
+    ...(AstroPlugin.configs.recommended.rules as Partial<AstroBaseRules>),
+    // @ts-expect-error
+    ...(a11y ? AstroPlugin.configs[`jsx-a11y-${a11y}`].rules : {}) as Partial<AstroJsxA11yRules>,
+    ...(stylistic
+      ? {
+          '@stylistic/jsx-one-expression-per-line': 'off',
+          '@stylistic/jsx-indent': 'off',
+        }
+      : {}) as Partial<StylisticRules>,
+  };
 
   return [
     {
@@ -113,7 +121,7 @@ export async function astro(
       name: 'thinkbuff:astro:setup',
       plugins: {
         astro: AstroPlugin,
-        ...a11y ? { 'jsx-a11y': require('eslint-plugin-jsx-a11y') } : {},
+        ...(a11y ? { 'jsx-a11y': JsxA11yPlugin } : {}),
       },
       processor: AstroPlugin.processors['.astro'],
     },
@@ -139,14 +147,7 @@ export async function astro(
         },
       },
       rules: {
-        ...(AstroPlugin.configs.recommended.rules as Partial<AstroBaseRules>),
-        ...jsxA11yRules,
-        ...(stylistic
-          ? {
-              '@stylistic/jsx-one-expression-per-line': 'off',
-              '@stylistic/jsx-indent': 'off',
-            }
-          : {}) as Partial<StylisticRules>,
+        ...rules,
         ...overrides,
       },
     },

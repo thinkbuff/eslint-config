@@ -6,6 +6,12 @@ export function isObject(value: unknown): value is UnknownRecord {
   return typeof value === 'object' && value !== null;
 }
 
+/**
+ * Resolves the module to extract the default export if it exists.
+ *
+ * @param m - The module to be resolved.
+ * @return The resolved default export or the module itself.
+ */
 export async function resolveModule<T>(m: Awaitable<T>): Promise<T extends { default: infer U } ? U : T> {
   const resolved = await m;
   return (resolved as any).default || resolved;
@@ -20,8 +26,7 @@ export async function resolveModule<T>(m: Awaitable<T>): Promise<T extends { def
 export function resolveOptions<
   T,
   DefaultOptions extends Exclude<T, boolean>,
-  Options = Exclude<T, boolean | undefined>,
-  Result = T extends false ? false : (Options | DefaultOptions),
+  Result = T extends false ? false : (Exclude<T, boolean | undefined> | DefaultOptions),
 >(options: T, defaultValue?: DefaultOptions): Result {
   if (typeof options === 'boolean') {
     return (options ? defaultValue : false) as Result;

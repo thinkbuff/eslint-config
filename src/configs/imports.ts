@@ -26,7 +26,8 @@ export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
           'error',
           {
             'groups': [
-              ['builtin', 'external', 'internal'],
+              ['builtin', 'external'],
+              ['internal'],
               'parent',
               ['sibling', 'index'],
               'object',
