@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.7
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.6...v0.0.7)
+
+### 🚀 Enhancements
+
+- **configs:** Add react ([7ea86b5](https://github.com/thinkbuff/eslint-config/commit/7ea86b5))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.0.6
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.5...v0.0.6)
