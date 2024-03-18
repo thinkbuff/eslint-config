@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.0.8
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.7...v0.0.8)
+
+### 🚀 Enhancements
+
+- **configs:** Set the a11y option of astro and react to false by default ([a4bf95d](https://github.com/thinkbuff/eslint-config/commit/a4bf95d))
+- **stylistic/multiline-ternary:** Set `ignoreJSX` to true ([2821464](https://github.com/thinkbuff/eslint-config/commit/2821464))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.0.7
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.6...v0.0.7)
