@@ -68,30 +68,29 @@ export interface AstroOptions {
   /**
    * Enable eslint-plugin-jsx-ally
    *
-   * @default 'recommend'
+   * @default false
    *
    * @see [eslint-plugin-astro#a11y-extension-rules](https://ota-meshi.github.io/eslint-plugin-astro/rules/#a11y-extension-rules)
    */
   a11y?: 'recommended' | 'strict' | false;
   /**
    * Enable eslint-plugin-stylistic
+   *
    * @default true
    */
   stylistic?: boolean | StylisticOptions;
+  /**
+   * @default {}
+   */
   overrides?: Partial<AstroRules & StylisticRules>;
 };
 
-const DefaultAstroOptions: AstroOptions = {
-  a11y: 'recommended',
-  stylistic: true,
-};
-
 export async function astro(
-  options: AstroOptions = DefaultAstroOptions,
+  options: AstroOptions = {},
 ): Promise<ESLintFlatConfig<AstroRules & StylisticRules>[]> {
   const {
     files = ['**/*.astro'],
-    a11y = 'recommended',
+    a11y = false,
     stylistic = true,
     overrides = {},
   } = options;
@@ -106,7 +105,9 @@ export async function astro(
   const rules = {
     ...(AstroPlugin.configs.recommended.rules as Partial<AstroBaseRules>),
     // @ts-expect-error
-    ...(a11y ? AstroPlugin.configs[`jsx-a11y-${a11y}`].rules : {}) as Partial<AstroJsxA11yRules>,
+    ...(a11y
+      ? AstroPlugin.configs[`jsx-a11y-${a11y}`].rules
+      : {}) as Partial<AstroJsxA11yRules>,
     ...(stylistic
       ? {
           '@stylistic/jsx-one-expression-per-line': 'off',
@@ -121,7 +122,9 @@ export async function astro(
       name: 'thinkbuff:astro:setup',
       plugins: {
         astro: AstroPlugin,
-        ...(a11y ? { 'jsx-a11y': JsxA11yPlugin } : {}),
+        ...(a11y
+          ? { 'jsx-a11y': JsxA11yPlugin }
+          : {}),
       },
       processor: AstroPlugin.processors['.astro'],
     },
