@@ -1,9 +1,6 @@
-import ReactPlugin from 'eslint-plugin-react';
-import ReactHookPlugin from 'eslint-plugin-react-hooks';
-import JsxA11yPlugin from 'eslint-plugin-jsx-a11y';
-
 import { GLOB_JSX, GLOB_TSX } from '../globs';
 import type { ESLintFlatConfig, RulesRecord } from '../types';
+import { resolveModule } from '../utils';
 
 export interface ReactOptions {
   /**
@@ -39,10 +36,16 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
     overrides = {},
   } = options;
 
+  const [ReactPlugin, ReactHookPlugin, JsxA11yPlugin] = await Promise.all([
+    resolveModule(import('eslint-plugin-react')),
+    resolveModule(import('eslint-plugin-react-hooks')),
+    a11y ? resolveModule(import('eslint-plugin-jsx-a11y')) : undefined,
+  ]);
+
   const rules = {
     ...ReactPlugin.configs.recommended.rules,
     ...ReactHookPlugin.configs.recommended.rules,
-    ...(a11y
+    ...(a11y && JsxA11yPlugin
       ? JsxA11yPlugin.configs[a11y].rules
       : {}),
   };
@@ -54,7 +57,7 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
       plugins: {
         'react': ReactPlugin,
         'react-hooks': ReactHookPlugin,
-        ...(a11y
+        ...(a11y && JsxA11yPlugin
           ? { 'jsx-a11y': JsxA11yPlugin }
           : {}),
       },

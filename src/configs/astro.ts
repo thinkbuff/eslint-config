@@ -95,16 +95,16 @@ export async function astro(
     overrides = {},
   } = options;
 
-  const [AstroPlugin, JsxA11yPlugin, AstroParser, TsParser] = await Promise.all([
+  const [AstroPlugin, AstroParser, TsParser, JsxA11yPlugin] = await Promise.all([
     resolveModule(import('eslint-plugin-astro')),
-    resolveModule(import('eslint-plugin-jsx-a11y')),
     resolveModule(import('astro-eslint-parser')),
     resolveModule(import('@typescript-eslint/parser')),
+    a11y ? resolveModule(import('eslint-plugin-jsx-a11y')) : undefined,
   ]);
 
   const rules = {
     ...(AstroPlugin.configs.recommended.rules as Partial<AstroBaseRules>),
-    ...(a11y
+    ...(a11y && JsxA11yPlugin
       // @ts-expect-error
       ? AstroPlugin.configs[`jsx-a11y-${a11y}`].rules
       : {}) as Partial<AstroJsxA11yRules>,
@@ -122,7 +122,7 @@ export async function astro(
       name: 'thinkbuff:astro:setup',
       plugins: {
         astro: AstroPlugin,
-        ...(a11y
+        ...(a11y && JsxA11yPlugin
           ? { 'jsx-a11y': JsxA11yPlugin }
           : {}),
       },
