@@ -25,7 +25,7 @@ export async function stylistic(options: StylisticOptions = {}): Promise<ESLintF
 
   const StylisticPlugin = await resolveModule(import('@stylistic/eslint-plugin'));
 
-  const { rules } = StylisticPlugin.configs.customize({
+  const config = StylisticPlugin.configs.customize({
     flat: true,
     ...customizeOptions,
   });
@@ -37,13 +37,12 @@ export async function stylistic(options: StylisticOptions = {}): Promise<ESLintF
         '@stylistic': StylisticPlugin,
       },
       rules: {
-        ...rules,
-        '@stylistic/jsx-indent': [
+        ...config.rules,
+        '@stylistic/multiline-ternary': [
           'error',
-          2,
+          'always-multiline',
           {
-            checkAttributes: false,
-            indentLogicalExpressions: true,
+            ignoreJSX: true,
           },
         ],
         ...overrides,

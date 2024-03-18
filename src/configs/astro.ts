@@ -104,8 +104,8 @@ export async function astro(
 
   const rules = {
     ...(AstroPlugin.configs.recommended.rules as Partial<AstroBaseRules>),
-    // @ts-expect-error
     ...(a11y
+      // @ts-expect-error
       ? AstroPlugin.configs[`jsx-a11y-${a11y}`].rules
       : {}) as Partial<AstroJsxA11yRules>,
     ...(stylistic
