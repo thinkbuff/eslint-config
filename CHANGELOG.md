@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.0
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.9...v0.1.0)
+
+### 🚀 Enhancements
+
+- **unicorn/rules:** Disable `unicorn/prefer-native-coercion-functions` ([e08c7a5](https://github.com/thinkbuff/eslint-config/commit/e08c7a5))
+- **unicorn/rules:** Disable `unicorn/better-regex` and `unicorn/prefer-add-event-listener` ([0d4bc1b](https://github.com/thinkbuff/eslint-config/commit/0d4bc1b))
+
+### 🏡 Chore
+
+- Update dependencies ([2f2a4a8](https://github.com/thinkbuff/eslint-config/commit/2f2a4a8))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.0.9
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.8...v0.0.9)
