@@ -1,6 +1,6 @@
 import globals from 'globals';
 
-import type { ESLintFlatConfig, RuleEntry } from '../types';
+import type { ESLintFlatConfig, RuleEntry, RulesRecord } from '../types';
 import { resolveModule } from '../utils';
 
 import type { StylisticOptions, StylisticRules } from './stylistic';
@@ -82,14 +82,14 @@ export interface AstroOptions {
   /**
    * @default {}
    */
-  overrides?: Partial<AstroRules & StylisticRules>;
+  overrides?: Partial<AstroRules & StylisticRules & RulesRecord>;
 };
 
 export async function astro(
   options: AstroOptions = {},
 ): Promise<ESLintFlatConfig<AstroRules & StylisticRules>[]> {
   const {
-    files = ['**/*.astro'],
+    files = ['**/*.astro', '*.astro'],
     a11y = false,
     stylistic = true,
     overrides = {},
@@ -104,7 +104,7 @@ export async function astro(
 
   const rules = {
     ...(AstroPlugin.configs.recommended.rules as Partial<AstroBaseRules>),
-    ...(a11y && JsxA11yPlugin
+    ...(a11y && ['recommended', 'strict'].includes(a11y) && JsxA11yPlugin
       // @ts-expect-error
       ? AstroPlugin.configs[`jsx-a11y-${a11y}`].rules
       : {}) as Partial<AstroJsxA11yRules>,
@@ -126,19 +126,12 @@ export async function astro(
           ? { 'jsx-a11y': JsxA11yPlugin }
           : {}),
       },
-      processor: AstroPlugin.processors['.astro'],
-    },
-    {
-      files,
-      name: 'thinkbuff:astro:rules',
       languageOptions: {
         parser: AstroParser,
         ecmaVersion: 11,
         globals: {
-          Astro: false,
-          Fragment: false,
           ...globals.node,
-          ...globals.es2020,
+          ...AstroPlugin.environments.astro.globals,
         },
         parserOptions: {
           extraFileExtensions: ['.astro'],
@@ -148,7 +141,42 @@ export async function astro(
             jsx: true,
           },
         },
+        sourceType: 'module',
       },
+      processor: AstroPlugin.processors['.astro'],
+    },
+    {
+      // Define the configuration for `<script>` tag.
+      // Script in `<script>` is assigned a virtual file name with the `.js` extension.
+      name: 'thinkbuff:astro:script:js',
+      files: ['**/*.astro/*.js', '*.astro/*.js'],
+      languageOptions: {
+        globals: {
+          ...globals.browser,
+        },
+        sourceType: 'module',
+      },
+    },
+    {
+      // Define the configuration for `<script>` tag when using `client-side-ts` processor.
+      // Script in `<script>` is assigned a virtual file name with the `.ts` extension.
+      name: 'thinkbuff:astro:script:ts',
+      files: ['**/*.astro/*.ts', '*.astro/*.ts'],
+      languageOptions: {
+        globals: {
+          ...globals.browser,
+        },
+        parser: TsParser,
+        sourceType: 'module',
+        parserOptions: {
+          project: null,
+        },
+      },
+      processor: AstroPlugin.processors['client-side-ts'],
+    },
+    {
+      files,
+      name: 'thinkbuff:astro:rules',
       rules: {
         ...rules,
         ...overrides,
