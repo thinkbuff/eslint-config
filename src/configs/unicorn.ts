@@ -13,9 +13,11 @@ export async function unicorn(): Promise<ESLintFlatConfig<UnicornRules>[]> {
       ...UnicornPlugin.configs['flat/recommended'],
       rules: {
         ...rules,
+        'unicorn/better-regex': 'off',
         'unicorn/prevent-abbreviations': 'off',
         'unicorn/no-null': 'off',
         'unicorn/no-array-reduce': 'off',
+        'unicorn/prefer-add-event-listener': 'off',
         'unicorn/prefer-native-coercion-functions': 'off',
         'unicorn/filename-case': [
           'error',
