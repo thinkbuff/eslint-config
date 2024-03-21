@@ -16,6 +16,7 @@ export async function unicorn(): Promise<ESLintFlatConfig<UnicornRules>[]> {
         'unicorn/prevent-abbreviations': 'off',
         'unicorn/no-null': 'off',
         'unicorn/no-array-reduce': 'off',
+        'unicorn/prefer-native-coercion-functions': 'off',
         'unicorn/filename-case': [
           'error',
           {
