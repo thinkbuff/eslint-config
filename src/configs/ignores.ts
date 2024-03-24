@@ -18,6 +18,7 @@ export async function ignores(): Promise<ESLintFlatConfig[]> {
         '**/.temp',
         '**/tmp',
         '**/.tmp',
+        '**/.astro',
         '**/.history',
         '**/.vitepress/cache',
         '**/.nitro',
