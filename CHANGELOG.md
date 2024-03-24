@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.1
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.0...v0.1.1)
+
+### 🚀 Enhancements
+
+- **ignores:** Add `**/.astro` ([74b1560](https://github.com/thinkbuff/eslint-config/commit/74b1560))
+
+### 🏡 Chore
+
+- Update dependencies and set packageManager to `pnpm@8.15.5` ([3f45d15](https://github.com/thinkbuff/eslint-config/commit/3f45d15))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.1.0
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.0.9...v0.1.0)

@@ -1,5 +1,7 @@
 # @thinkbuff/eslint-config
 
+[![npm](https://img.shields.io/npm/v/@thinkbuff/eslint-config.svg)](https://www.npmjs.com/package/@thinkbuff/eslint-config)
+
 [Thinkbuff](https://github.com/thinkbuff)'s ESLint config preset
 
 > Thanks to [antfu/eslint-config](https://github.com/antfu/eslint-config) for the inspiration and reference.
