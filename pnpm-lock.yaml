@@ -36,8 +36,8 @@ dependencies:
     specifier: ^0.5.0
     version: 0.5.0
   type-fest:
-    specifier: ^4.13.1
-    version: 4.13.1
+    specifier: ^4.14.0
+    version: 4.14.0
   typescript-eslint:
     specifier: ^7.3.1
     version: 7.3.1(eslint@8.57.0)(typescript@5.4.3)
@@ -59,8 +59,8 @@ devDependencies:
     specifier: ^8.57.0
     version: 8.57.0
   eslint-flat-config-viewer:
-    specifier: ^0.1.13
-    version: 0.1.13(eslint@8.57.0)(typescript@5.4.3)
+    specifier: ^0.1.14
+    version: 0.1.14(eslint@8.57.0)(typescript@5.4.3)
   eslint-plugin-astro:
     specifier: ^0.32.0
     version: 0.32.0(eslint@8.57.0)
@@ -1932,8 +1932,8 @@ packages:
       semver: 7.6.0
     dev: true
 
-  /eslint-flat-config-viewer@0.1.13(eslint@8.57.0)(typescript@5.4.3):
-    resolution: {integrity: sha512-ZR++uDrSrjxUogGqZH6ET2lwCXybN195QKTX0pDurq6EiWk2JiNBWgR+XuHnj0gjgGRk6enj3Dr7zWGXBER/aA==}
+  /eslint-flat-config-viewer@0.1.14(eslint@8.57.0)(typescript@5.4.3):
+    resolution: {integrity: sha512-2ErHkowC7N9jiLHYAEI7lrm9phEPkyuZTCbRjVmj3B9yk/zVHhLCSlPGWzkgAEDW2MQRGSkvlbbhD7C9FRhYXQ==}
     hasBin: true
     peerDependencies:
       eslint: ^8.50.0
@@ -1946,7 +1946,8 @@ packages:
       eslint: 8.57.0
       get-port-please: 3.1.2
       jiti: 1.21.0
-      ofetch: 1.3.3
+      minimatch: 9.0.3
+      ofetch: 1.3.4
       open: 10.1.0
       unhead: 1.8.20
       vue: 3.4.21(typescript@5.4.3)
@@ -3248,6 +3249,10 @@ packages:
     resolution: {integrity: sha512-69mtXOFZ6hSkYiXAVB5SqaRvrbITC/NPyqv7yuu/qw0nmgPyYbIMYYNIDhNtwPrzk0ptrimrLz/hhjvm4w5Z+w==}
     dev: true
 
+  /node-fetch-native@1.6.4:
+    resolution: {integrity: sha512-IhOigYzAKHd244OC0JIMIUrjzctirCmPkaIfhDeGcEETWof5zKYUW7e7MYvChGWh/4CJeXEgsRyGzuF334rOOQ==}
+    dev: true
+
   /node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
     dev: false
@@ -3361,6 +3366,14 @@ packages:
       destr: 2.0.3
       node-fetch-native: 1.6.2
       ufo: 1.4.0
+    dev: true
+
+  /ofetch@1.3.4:
+    resolution: {integrity: sha512-KLIET85ik3vhEfS+3fDlc/BAZiAp+43QEC/yCo5zkNoY2YaKvNkOaFr/6wCFgFH1kuYQM5pMNi0Tg8koiIemtw==}
+    dependencies:
+      destr: 2.0.3
+      node-fetch-native: 1.6.4
+      ufo: 1.5.3
     dev: true
 
   /ohash@1.1.3:
@@ -4213,8 +4226,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /type-fest@4.13.1:
-    resolution: {integrity: sha512-ASMgM+Vf2cLwDMt1KXSkMUDSYCxtckDJs8zsaVF/mYteIsiARKCVtyXtcK38mIKbLTctZP8v6GMqdNaeI3fo7g==}
+  /type-fest@4.14.0:
+    resolution: {integrity: sha512-on5/Cw89wwqGZQu+yWO0gGMGu8VNxsaW9SB2HE8yJjllEk7IDTwnSN1dUVldYILhYPN5HzD7WAaw2cc/jBfn0Q==}
     engines: {node: '>=16'}
     dev: false
 
