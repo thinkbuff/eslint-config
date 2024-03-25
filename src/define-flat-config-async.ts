@@ -55,6 +55,7 @@ export interface DefineFlatConfigAsyncOptions {
    * - `eslint-plugin-react`
    * - `eslint-plugin-react-hooks`
    * - `eslint-plugin-jsx-a11y`
+   * - `eslint-plugin-react-refresh`
    *
    * @default false
    */

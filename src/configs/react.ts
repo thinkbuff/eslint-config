@@ -1,3 +1,5 @@
+import { isPackageExists } from 'local-pkg';
+
 import { GLOB_JSX, GLOB_TSX } from '../globs';
 import type { ESLintFlatConfig, RulesRecord } from '../types';
 import { resolveModule } from '../utils';
@@ -28,6 +30,10 @@ export interface ReactOptions {
   overrides?: Partial<RulesRecord>;
 }
 
+const ReactRefreshAllowConstantExportPackages = [
+  'vite',
+];
+
 export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfig[]> {
   const {
     files = [GLOB_JSX, GLOB_TSX],
@@ -36,11 +42,16 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
     overrides = {},
   } = options;
 
-  const [ReactPlugin, ReactHookPlugin, JsxA11yPlugin] = await Promise.all([
+  const [ReactPlugin, ReactHookPlugin, ReactRefreshPlugin, JsxA11yPlugin] = await Promise.all([
     resolveModule(import('eslint-plugin-react')),
     resolveModule(import('eslint-plugin-react-hooks')),
+    resolveModule(import('eslint-plugin-react-refresh')),
     a11y ? resolveModule(import('eslint-plugin-jsx-a11y')) : undefined,
   ]);
+
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+    i => isPackageExists(i),
+  );
 
   const rules = {
     ...ReactPlugin.configs.recommended.rules,
@@ -57,6 +68,7 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
       plugins: {
         'react': ReactPlugin,
         'react-hooks': ReactHookPlugin,
+        'react-refresh': ReactRefreshPlugin,
         ...(a11y && JsxA11yPlugin
           ? { 'jsx-a11y': JsxA11yPlugin }
           : {}),
@@ -70,6 +82,11 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
       },
       rules: {
         ...rules,
+        // react refresh
+        'react-refresh/only-export-components': [
+          'warn',
+          { allowConstantExport: isAllowConstantExport },
+        ],
         'react/no-unsafe': 'off',
         'react/react-in-jsx-scope': 'off',
         ...typescript
