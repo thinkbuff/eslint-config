@@ -19,6 +19,7 @@ export interface AstroBaseRules {
   'astro/prefer-class-list-directive': RuleEntry;
   'astro/prefer-object-class-list': RuleEntry;
   'astro/prefer-split-class-list': RuleEntry;
+  'astro/missing-client-only-directive-value': RuleEntry;
   'astro/semi': RuleEntry;
 };
 
@@ -143,7 +144,7 @@ export async function astro(
         },
         sourceType: 'module',
       },
-      processor: AstroPlugin.processors['.astro'],
+      processor: AstroPlugin.processors['client-side-ts'],
     },
     {
       // Define the configuration for `<script>` tag.
@@ -172,7 +173,6 @@ export async function astro(
           project: null,
         },
       },
-      processor: AstroPlugin.processors['client-side-ts'],
     },
     {
       files,
