@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.2
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.1...v0.1.2)
+
+### 🚀 Enhancements
+
+- **configs/react:** Add `eslint-plugin-react-refresh` ([fa76b68](https://github.com/thinkbuff/eslint-config/commit/fa76b68))
+
+### 🩹 Fixes
+
+- **configs/astro:** Client-side scripts not being able to linting ([01ebda6](https://github.com/thinkbuff/eslint-config/commit/01ebda6))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.1.1
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.0...v0.1.1)
