@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.4
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.3...v0.1.4)
+
+### 🚀 Enhancements
+
+- Disable `react-hooks/rules-of-hooks` and `import/no-default-export` rules for storybook files ([46e1a9f](https://github.com/thinkbuff/eslint-config/commit/46e1a9f))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.1.3
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.2...v0.1.3)
