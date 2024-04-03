@@ -103,5 +103,18 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
         },
       },
     },
+    {
+      name: 'thinkbuff:react:disable-rules-of-hooks',
+      files: [
+        '**/.storybook/*.@(ts|tsx|js|jsx|mjs|cjs)',
+        '**/*.@(stories|story).@(ts|tsx|js|jsx|mjs|cjs)',
+      ],
+      plugins: {
+        'react-hooks': ReactHookPlugin,
+      },
+      rules: {
+        'react-hooks/rules-of-hooks': 'off',
+      },
+    },
   ];
 }

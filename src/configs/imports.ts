@@ -46,6 +46,8 @@ export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
         `**/{views,pages,routes,middleware,plugins,api}/${GLOB_SRC}`,
         `**/{index,vite,esbuild,rollup,rolldown,webpack,rspack}.ts`,
         '**/*.d.ts',
+        '**/.storybook/*.@(ts|tsx|js|jsx|mjs|cjs)',
+        '**/*.@(stories|story).@(ts|tsx|js|jsx|mjs|cjs)',
       ],
       plugins: {
         import: ImportPlugin,
