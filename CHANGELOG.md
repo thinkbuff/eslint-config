@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.3
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.2...v0.1.3)
+
+### 🏡 Chore
+
+- Update dependencies and set packageManager to `pnpm@8.15.6` ([46b76d4](https://github.com/thinkbuff/eslint-config/commit/46b76d4))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.1.2
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.1...v0.1.2)
