@@ -22,6 +22,7 @@ import {
   type ReactOptions,
   type TypescriptOptions,
   type TypescriptESlintRules,
+  type PerfectionistOptions,
 } from './configs';
 import type { Awaitable, ESLintFlatConfig, RulesRecord } from './types';
 import { resolveOptions } from './utils';
@@ -86,7 +87,7 @@ export interface DefineFlatConfigAsyncOptions {
    *
    * @default true,
    */
-  perfectionist?: boolean;
+  perfectionist?: boolean | PerfectionistOptions;
   /**
    * Additional ESlint Flat configuration.
    *
@@ -128,7 +129,7 @@ export async function defineFlatConfigAsync(options: DefineFlatConfigAsyncOption
   }
 
   if (options.perfectionist !== false) {
-    configs.push(perfectionist());
+    configs.push(perfectionist(resolveOptions(options.perfectionist)));
   }
 
   const values = await Promise.all([...configs, ...(Array.isArray(options.extends) ? options.extends : [])]);
