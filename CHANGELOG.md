@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.5
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.4...v0.1.5)
+
+### 🚀 Enhancements
+
+- **configs/perfectionist:** Add `options.preset` to set recommended config rules ([c169aa5](https://github.com/thinkbuff/eslint-config/commit/c169aa5))
+
+### 🏡 Chore
+
+- Update dependencies and use `perfectionist/sort-objects` rule for project ([3be28cd](https://github.com/thinkbuff/eslint-config/commit/3be28cd))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.1.4
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.3...v0.1.4)
