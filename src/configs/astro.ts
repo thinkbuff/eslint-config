@@ -90,10 +90,10 @@ export async function astro(
   options: AstroOptions = {},
 ): Promise<ESLintFlatConfig<AstroRules & StylisticRules>[]> {
   const {
-    files = ['**/*.astro', '*.astro'],
     a11y = false,
-    stylistic = true,
+    files = ['**/*.astro', '*.astro'],
     overrides = {},
+    stylistic = true,
   } = options;
 
   const [AstroPlugin, AstroParser, TsParser, JsxA11yPlugin] = await Promise.all([
@@ -111,38 +111,38 @@ export async function astro(
       : {}) as Partial<AstroJsxA11yRules>,
     ...(stylistic
       ? {
-          '@stylistic/jsx-one-expression-per-line': 'off',
           '@stylistic/jsx-indent': 'off',
+          '@stylistic/jsx-one-expression-per-line': 'off',
         }
       : {}) as Partial<StylisticRules>,
   };
 
   return [
     {
-      files,
       name: 'thinkbuff:astro:setup',
-      plugins: {
-        astro: AstroPlugin,
-        ...(a11y && JsxA11yPlugin
-          ? { 'jsx-a11y': JsxA11yPlugin }
-          : {}),
-      },
+      files,
       languageOptions: {
-        parser: AstroParser,
         ecmaVersion: 11,
         globals: {
           ...globals.node,
           ...AstroPlugin.environments.astro.globals,
         },
+        parser: AstroParser,
         parserOptions: {
-          extraFileExtensions: ['.astro'],
-          parser: TsParser,
-          sourceType: 'module',
           ecmaFeatures: {
             jsx: true,
           },
+          extraFileExtensions: ['.astro'],
+          parser: TsParser,
+          sourceType: 'module',
         },
         sourceType: 'module',
+      },
+      plugins: {
+        astro: AstroPlugin,
+        ...(a11y && JsxA11yPlugin
+          ? { 'jsx-a11y': JsxA11yPlugin }
+          : {}),
       },
       processor: AstroPlugin.processors['client-side-ts'],
     },
@@ -168,15 +168,15 @@ export async function astro(
           ...globals.browser,
         },
         parser: TsParser,
-        sourceType: 'module',
         parserOptions: {
           project: null,
         },
+        sourceType: 'module',
       },
     },
     {
-      files,
       name: 'thinkbuff:astro:rules',
+      files,
       rules: {
         ...rules,
         ...overrides,

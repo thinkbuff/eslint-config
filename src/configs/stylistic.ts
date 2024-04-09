@@ -10,11 +10,11 @@ export interface StylisticOptions extends Omit<StylisticCustomizeOptions, 'flat'
 }
 
 const DefaultStylisticOptions: StylisticOptions = {
+  braceStyle: '1tbs',
   indent: 2,
   jsx: true,
   quotes: 'single',
   semi: true,
-  braceStyle: '1tbs',
 };
 
 export async function stylistic(options: StylisticOptions = {}): Promise<ESLintFlatConfig<StylisticRules>[]> {

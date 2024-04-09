@@ -36,10 +36,10 @@ const ReactRefreshAllowConstantExportPackages = [
 
 export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfig[]> {
   const {
-    files = [GLOB_JSX, GLOB_TSX],
     a11y = false,
-    typescript = true,
+    files = [GLOB_JSX, GLOB_TSX],
     overrides = {},
+    typescript = true,
   } = options;
 
   const [ReactPlugin, ReactHookPlugin, ReactRefreshPlugin, JsxA11yPlugin] = await Promise.all([
@@ -65,6 +65,13 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
     {
       name: 'thinkbuff:react:setup',
       files,
+      languageOptions: {
+        parserOptions: {
+          ecmaFeatures: {
+            jsx: true,
+          },
+        },
+      },
       plugins: {
         'react': ReactPlugin,
         'react-hooks': ReactHookPlugin,
@@ -73,22 +80,15 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
           ? { 'jsx-a11y': JsxA11yPlugin }
           : {}),
       },
-      languageOptions: {
-        parserOptions: {
-          ecmaFeatures: {
-            jsx: true,
-          },
-        },
-      },
       rules: {
         ...rules,
+        'react/no-unsafe': 'off',
+        'react/react-in-jsx-scope': 'off',
         // react refresh
         'react-refresh/only-export-components': [
           'warn',
           { allowConstantExport: isAllowConstantExport },
         ],
-        'react/no-unsafe': 'off',
-        'react/react-in-jsx-scope': 'off',
         ...typescript
           ? {
               'react/jsx-no-undef': 'off',

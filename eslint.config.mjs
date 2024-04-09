@@ -15,4 +15,24 @@ async function defineFlatConfigAsync(...args) {
   return m.defineFlatConfigAsync(...args);
 }
 
-export default defineFlatConfigAsync();
+export default defineFlatConfigAsync({
+  extends: [
+    {
+      files: ['src/**/*.ts'],
+      rules: {
+        'perfectionist/sort-objects': [
+          'error',
+          {
+            'type': 'natural',
+            'order': 'asc',
+            'partition-by-comment': true,
+            'groups': ['top', 'unknown'],
+            'custom-groups': {
+              top: ['name', 'type'],
+            },
+          },
+        ],
+      },
+    },
+  ],
+});

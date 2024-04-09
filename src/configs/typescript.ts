@@ -37,18 +37,18 @@ export async function typescript(options: TypescriptOptions = {}): Promise<ESLin
     {
       name: 'thinkbuff:typescript',
       files: [GLOB_TS, GLOB_TSX],
-      plugins: {
-        '@typescript-eslint': tseslint.plugin,
-      },
       languageOptions: {
         parser: tseslint.parser,
         parserOptions: {
-          sourceType: 'module',
           ecmaFeatures: {
             jsx: true,
           },
+          sourceType: 'module',
         },
         sourceType: 'module',
+      },
+      plugins: {
+        '@typescript-eslint': tseslint.plugin,
       },
       rules: {
         ...rules,
@@ -70,19 +70,19 @@ export async function typescript(options: TypescriptOptions = {}): Promise<ESLin
         '@typescript-eslint/no-import-type-side-effects': 'error',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-redeclare': 'error',
-        '@typescript-eslint/prefer-as-const': 'warn',
-        '@typescript-eslint/prefer-literal-enum-member': [
-          'error',
-          { allowBitwiseExpressions: true },
-        ],
         '@typescript-eslint/no-unused-vars': [
           'error',
           {
             argsIgnorePattern: '^_',
-            varsIgnorePattern: '^_',
             caughtErrorsIgnorePattern: '^_',
             ignoreRestSiblings: true,
+            varsIgnorePattern: '^_',
           },
+        ],
+        '@typescript-eslint/prefer-as-const': 'warn',
+        '@typescript-eslint/prefer-literal-enum-member': [
+          'error',
+          { allowBitwiseExpressions: true },
         ],
         ...overrides,
       },
