@@ -53,7 +53,7 @@ export interface DefineFlatConfigAsyncOptions {
    * Enable React rules.
    *
    * Requires installing:
-   * - `eslint-plugin-react`
+   * - `@eslint-react/eslint-plugin`
    * - `eslint-plugin-react-hooks`
    * - `eslint-plugin-jsx-a11y`
    * - `eslint-plugin-react-refresh`

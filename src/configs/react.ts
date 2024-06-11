@@ -30,35 +30,31 @@ export interface ReactOptions {
   overrides?: Partial<RulesRecord>;
 }
 
-const ReactRefreshAllowConstantExportPackages = [
-  'vite',
-];
+const ReactRefreshAllowConstantExportPackages = ['vite'];
 
 export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfig[]> {
-  const {
-    a11y = false,
-    files = [GLOB_JSX, GLOB_TSX],
-    overrides = {},
-    typescript = true,
-  } = options;
+  const { a11y = false, files = [GLOB_JSX, GLOB_TSX], overrides = {}, typescript = true } = options;
 
   const [ReactPlugin, ReactHookPlugin, ReactRefreshPlugin, JsxA11yPlugin] = await Promise.all([
-    resolveModule(import('eslint-plugin-react')),
+    resolveModule(import('@eslint-react/eslint-plugin')),
     resolveModule(import('eslint-plugin-react-hooks')),
     resolveModule(import('eslint-plugin-react-refresh')),
     a11y ? resolveModule(import('eslint-plugin-jsx-a11y')) : undefined,
   ]);
 
-  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
-    i => isPackageExists(i),
-  );
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(i => isPackageExists(i));
+
+  const plugins = ReactPlugin.configs.all.plugins;
 
   const rules = {
-    ...ReactPlugin.configs.recommended.rules,
+    ...Object.fromEntries(
+      Object.entries(ReactPlugin.configs.recommended.rules).map(([name, value]) => [
+        name.replace('@eslint-react/dom/', 'react-dom/').replace('@eslint-react/', 'react/'),
+        value,
+      ]),
+    ),
     ...ReactHookPlugin.configs.recommended.rules,
-    ...(a11y && JsxA11yPlugin
-      ? JsxA11yPlugin.configs[a11y].rules
-      : {}),
+    ...(a11y && JsxA11yPlugin ? JsxA11yPlugin.configs[a11y].rules : {}),
   };
 
   return [
@@ -73,28 +69,26 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
         },
       },
       plugins: {
-        'react': ReactPlugin,
+        'react': plugins['@eslint-react'],
+        'react-dom': plugins['@eslint-react/dom'],
         'react-hooks': ReactHookPlugin,
+        'react-hooks-extra': plugins['@eslint-react/hooks-extra'],
+        'react-naming-convention': plugins['@eslint-react/naming-convention'],
         'react-refresh': ReactRefreshPlugin,
-        ...(a11y && JsxA11yPlugin
-          ? { 'jsx-a11y': JsxA11yPlugin }
-          : {}),
+        ...(a11y && JsxA11yPlugin ? { 'jsx-a11y': JsxA11yPlugin } : {}),
       },
       rules: {
         ...rules,
         'react/no-unsafe': 'off',
         'react/react-in-jsx-scope': 'off',
         // react refresh
-        'react-refresh/only-export-components': [
-          'warn',
-          { allowConstantExport: isAllowConstantExport },
-        ],
-        ...typescript
+        'react-refresh/only-export-components': ['warn', { allowConstantExport: isAllowConstantExport }],
+        ...(typescript
           ? {
               'react/jsx-no-undef': 'off',
               'react/prop-type': 'off',
             }
-          : {},
+          : {}),
         ...overrides,
       },
       settings: {
@@ -105,10 +99,7 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
     },
     {
       name: 'thinkbuff:react:disable-rules-of-hooks',
-      files: [
-        '**/.storybook/*.@(ts|tsx|js|jsx|mjs|cjs)',
-        '**/*.@(stories|story).@(ts|tsx|js|jsx|mjs|cjs)',
-      ],
+      files: ['**/.storybook/*.@(ts|tsx|js|jsx|mjs|cjs)', '**/*.@(stories|story).@(ts|tsx|js|jsx|mjs|cjs)'],
       plugins: {
         'react-hooks': ReactHookPlugin,
       },

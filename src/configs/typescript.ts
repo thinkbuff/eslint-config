@@ -1,8 +1,8 @@
 import type { RuleOptions } from '@eslint-types/typescript-eslint/types';
-import tseslint from 'typescript-eslint';
 
 import type { ESLintFlatConfig, RulesRecord } from '../types';
 import { GLOB_TS, GLOB_TSX } from '../globs';
+import { resolveModule } from '../utils';
 
 export type TypescriptESlintRules = RuleOptions;
 
@@ -19,8 +19,10 @@ export interface TypescriptOptions {
 export async function typescript(options: TypescriptOptions = {}): Promise<ESLintFlatConfig<TypescriptESlintRules>[]> {
   const { overrides = {} } = options;
 
+  const TSESLint = await resolveModule(import('typescript-eslint'));
+
   const rules: RulesRecord = {};
-  for (const config of tseslint.configs.recommended) {
+  for (const config of TSESLint.configs.recommended) {
     if (!config.rules) {
       continue;
     }
@@ -38,7 +40,7 @@ export async function typescript(options: TypescriptOptions = {}): Promise<ESLin
       name: 'thinkbuff:typescript',
       files: [GLOB_TS, GLOB_TSX],
       languageOptions: {
-        parser: tseslint.parser,
+        parser: TSESLint.parser,
         parserOptions: {
           ecmaFeatures: {
             jsx: true,
@@ -48,7 +50,7 @@ export async function typescript(options: TypescriptOptions = {}): Promise<ESLin
         sourceType: 'module',
       },
       plugins: {
-        '@typescript-eslint': tseslint.plugin,
+        '@typescript-eslint': TSESLint.plugin,
       },
       rules: {
         ...rules,
