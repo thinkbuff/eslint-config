@@ -1,5 +1,5 @@
 import type { RuleOptions as ImportRuleOptions } from '@eslint-types/import/types';
-import * as ImportPlugin from 'eslint-plugin-i';
+import * as ImportPlugin from 'eslint-plugin-import-x';
 
 import { GLOB_SRC, GLOB_SRC_EXT } from '../globs';
 import type { ESLintFlatConfig } from '../types';
