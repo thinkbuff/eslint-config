@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v0.2.0
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.5...v0.2.0)
+
+### 🚀 Enhancements
+
+- Remove unnecessary deps and upgrade react, astro plugins ([#1](https://github.com/thinkbuff/eslint-config/pull/1))
+
+### 🏡 Chore
+
+- ESM only ([#1](https://github.com/thinkbuff/eslint-config/pull/1))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Migrate to eslint v9 ([#1](https://github.com/thinkbuff/eslint-config/pull/1))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.1.5
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.4...v0.1.5)
