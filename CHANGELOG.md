@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.2.1
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.0...v0.2.1)
+
+### 🚀 Enhancements
+
+- **configs/astro**: add stylistic rules configuration for Astro build ([873ec49](https://github.com/thinkbuff/eslint-config/commit/873ec49))
+
+### 🏡 Chore
+
+- Bump pnpm version to 9.4.0, update peer dependencies and devDependencies ([873ec49](https://github.com/thinkbuff/eslint-config/commit/873ec49))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.2.0
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.1.5...v0.2.0)
