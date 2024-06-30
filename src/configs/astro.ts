@@ -99,8 +99,11 @@ export async function astro(
   const rules = {
     ...(stylistic
       ? {
+          '@stylistic/indent': 'off',
+          '@stylistic/jsx-closing-tag-location': 'off',
           '@stylistic/jsx-indent': 'off',
           '@stylistic/jsx-one-expression-per-line': 'off',
+          '@stylistic/no-multiple-empty-lines': 'off',
         }
       : {}) as Partial<StylisticRules>,
   };
