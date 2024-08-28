@@ -23,11 +23,11 @@ export default defineFlatConfigAsync({
         'perfectionist/sort-objects': [
           'error',
           {
-            'type': 'natural',
-            'order': 'asc',
-            'partition-by-comment': true,
-            'groups': ['top', 'unknown'],
-            'custom-groups': {
+            type: 'natural',
+            order: 'asc',
+            partitionByComment: true,
+            groups: ['top', 'unknown'],
+            customGroups: {
               top: ['name', 'type'],
             },
           },

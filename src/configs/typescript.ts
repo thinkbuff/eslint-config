@@ -94,7 +94,6 @@ export async function typescript(options: TypescriptOptions = {}): Promise<ESLin
       files: ['**/*.js', '**/*.cjs'],
       rules: {
         '@typescript-eslint/no-require-imports': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ] as ESLintFlatConfig<TypescriptESlintRules>[];
