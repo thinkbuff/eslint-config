@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.2
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.1...v0.2.2)
+
+### 🏡 Chore
+
+- Update dependencies and remove unused ESLint rule ([af65055](https://github.com/thinkbuff/eslint-config/commit/af65055))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.2.1
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.0...v0.2.1)
