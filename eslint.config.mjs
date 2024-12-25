@@ -1,4 +1,4 @@
-import jiti from 'jiti';
+import { createJiti } from 'jiti';
 
 /**
  * Asynchronously generates an ESLint configuration.
@@ -6,11 +6,11 @@ import jiti from 'jiti';
  * @param {Parameters<import('./src/define-flat-config-async').defineFlatConfigAsync>} args - The arguments to pass to `defineFlatConfig`.
  */
 async function defineFlatConfigAsync(...args) {
-  const JITI = jiti(null, { esmResolve: true, interopDefault: true });
+  const jiti = createJiti(null, { esmResolve: true, interopDefault: true });
   /**
    * @type {import('./src/index')}
    */
-  const m = await JITI('./src/index.ts');
+  const m = await jiti.import('./src/index.ts');
 
   return m.defineFlatConfigAsync(...args);
 }
