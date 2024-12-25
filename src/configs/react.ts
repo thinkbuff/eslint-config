@@ -52,6 +52,8 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
         name
           .replace('@eslint-react/dom/', 'react-dom/')
           .replace('@eslint-react/web-api/', 'react-web-api/')
+          .replace('@eslint-react/naming-convention/', 'react-naming-convention/')
+          .replace('@eslint-react/hooks-extra/', 'react-hooks-extra/')
           .replace('@eslint-react/', 'react/'),
         value,
       ]),
