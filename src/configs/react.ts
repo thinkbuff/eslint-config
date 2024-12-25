@@ -78,6 +78,7 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
         'react-hooks-extra': plugins['@eslint-react/hooks-extra'],
         'react-naming-convention': plugins['@eslint-react/naming-convention'],
         'react-refresh': ReactRefreshPlugin,
+        'react-web-api': plugins['@eslint-react/web-api'],
         ...(a11y && JsxA11yPlugin ? { 'jsx-a11y': JsxA11yPlugin } : {}),
       },
       rules: {
