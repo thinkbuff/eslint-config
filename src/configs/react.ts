@@ -33,7 +33,7 @@ export interface ReactOptions {
 const ReactRefreshAllowConstantExportPackages = ['vite'];
 
 export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfig[]> {
-  const { a11y = false, files = [GLOB_JSX, GLOB_TSX], overrides = {}, typescript = true } = options;
+  const { typescript = true, a11y = false, files = [GLOB_JSX, GLOB_TSX], overrides = {} } = options;
 
   const [ReactPlugin, ReactHookPlugin, ReactRefreshPlugin, JsxA11yPlugin] = await Promise.all([
     resolveModule(import('@eslint-react/eslint-plugin')),
@@ -85,8 +85,8 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
         'react-refresh/only-export-components': ['warn', { allowConstantExport: isAllowConstantExport }],
         ...(typescript
           ? {
-              'react/jsx-no-undef': 'off',
               'react/prop-type': 'off',
+              'react/jsx-no-undef': 'off',
             }
           : {}),
         ...overrides,

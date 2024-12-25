@@ -14,12 +14,12 @@ export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
         import: ImportPlugin,
       },
       rules: {
+        'import/no-named-default': 'error',
         'import/first': 'error',
         'import/newline-after-import': ['error', { count: 1 }],
         'import/no-default-export': 'error',
         'import/no-duplicates': 'error',
         'import/no-mutable-exports': 'error',
-        'import/no-named-default': 'error',
         'import/no-self-import': 'error',
         'import/no-webpack-loader-syntax': 'error',
         'import/order': [
