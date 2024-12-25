@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.3
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.2...v0.2.3)
+
+### 🏡 Chore
+
+- Update dependencies and adjust eslint configurations ([5c0b097](https://github.com/thinkbuff/eslint-config/commit/5c0b097))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.2.2
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.1...v0.2.2)
