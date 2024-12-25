@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v0.2.4
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.3...v0.2.4)
+
+### 🩹 Fixes
+
+- **react:** Add web-api rule prefix replacement ([e4833e7](https://github.com/thinkbuff/eslint-config/commit/e4833e7))
+
+### 💅 Refactors
+
+- Update jiti initialization in eslint config ([5e3134e](https://github.com/thinkbuff/eslint-config/commit/5e3134e))
+
+### 📖 Documentation
+
+- Update README.md ([445129a](https://github.com/thinkbuff/eslint-config/commit/445129a))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.2.3
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.2...v0.2.3)
