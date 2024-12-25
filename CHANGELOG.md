@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.6
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.5...v0.2.6)
+
+### 🩹 Fixes
+
+- **react:** Add rule prefix replacements for hooks and naming ([4f05459](https://github.com/thinkbuff/eslint-config/commit/4f05459))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.2.5
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.4...v0.2.5)

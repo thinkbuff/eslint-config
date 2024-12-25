@@ -1,7 +1,7 @@
 {
   "name": "@thinkbuff/eslint-config",
   "type": "module",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Thinkbuff's ESLint config preset",
   "files": [
     "dist"
