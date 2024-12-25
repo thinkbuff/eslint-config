@@ -49,7 +49,10 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
   const rules = {
     ...Object.fromEntries(
       Object.entries(ReactPlugin.configs.recommended.rules).map(([name, value]) => [
-        name.replace('@eslint-react/dom/', 'react-dom/').replace('@eslint-react/', 'react/'),
+        name
+          .replace('@eslint-react/dom/', 'react-dom/')
+          .replace('@eslint-react/web-api/', 'react-web-api/')
+          .replace('@eslint-react/', 'react/'),
         value,
       ]),
     ),
