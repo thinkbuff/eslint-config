@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.5
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.4...v0.2.5)
+
+### 🚀 Enhancements
+
+- **react:** Add react-web-api plugin support ([7062cc5](https://github.com/thinkbuff/eslint-config/commit/7062cc5))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](http://github.com/eteplus))
+
 ## v0.2.4
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.3...v0.2.4)
