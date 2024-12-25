@@ -8,8 +8,8 @@
 
 ## Usage
 
-- **Requires Node.js `>=18.18.0`.**
-- **Requires ESLint `>=8.57.0`.**
+- **Requires Node.js `>=20`.**
+- **Requires ESLint `>=9`.**
 
 ### Install
 
