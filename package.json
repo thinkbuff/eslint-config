@@ -15,11 +15,12 @@
       "import": "./dist/index.js"
     }
   },
-  "packageManager": "pnpm@9.15.1",
+  "packageManager": "pnpm@10.10.0",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
+    "clean": "rm -rf dist node_modules",
     "build": "tsup --clean --dts",
     "dev": "tsup --clean --watch & npx @eslint/config-inspector",
     "watch": "tsup --clean --watch",
@@ -40,14 +41,14 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@eslint-react/eslint-plugin": "^1.5.15",
-    "@unocss/eslint-plugin": ">=0.61.0",
-    "astro-eslint-parser": "^1.0.2",
-    "eslint": ">=9",
-    "eslint-plugin-astro": "^1.3.1",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.16"
+    "@eslint-react/eslint-plugin": "catalog:peer",
+    "@unocss/eslint-plugin": "catalog:peer",
+    "astro-eslint-parser": "catalog:peer",
+    "eslint": "catalog:peer",
+    "eslint-plugin-astro": "catalog:peer",
+    "eslint-plugin-jsx-a11y": "catalog:peer",
+    "eslint-plugin-react-hooks": "catalog:peer",
+    "eslint-plugin-react-refresh": "catalog:peer"
   },
   "peerDependenciesMeta": {
     "@unocss/eslint-plugin": {
@@ -73,35 +74,35 @@
     }
   },
   "devDependencies": {
-    "@eslint-react/eslint-plugin": "^1.22.1",
-    "@eslint/config-inspector": "^0.6.0",
-    "@types/node": "^22.10.2",
-    "@unocss/eslint-plugin": "^0.65.2",
-    "astro-eslint-parser": "^1.1.0",
-    "changelogen": "^0.5.7",
-    "eslint": "^9.17.0",
-    "eslint-plugin-astro": "^1.3.1",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
-    "jiti": "^2.4.2",
-    "lint-staged": "^15.2.11",
-    "simple-git-hooks": "^2.11.1",
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.2"
+    "@eslint-react/eslint-plugin": "catalog:peer",
+    "@eslint/config-inspector": "catalog:dev",
+    "@types/node": "catalog:types",
+    "@eslint-types/import": "catalog:types",
+    "@eslint-types/typescript-eslint": "catalog:types",
+    "@eslint-types/unicorn": "catalog:types",
+    "@unocss/eslint-plugin": "catalog:peer",
+    "astro-eslint-parser": "catalog:peer",
+    "changelogen": "catalog:dev",
+    "eslint": "catalog:peer",
+    "eslint-plugin-astro": "catalog:peer",
+    "eslint-plugin-jsx-a11y": "catalog:peer",
+    "eslint-plugin-react-hooks": "catalog:peer",
+    "eslint-plugin-react-refresh": "catalog:peer",
+    "jiti": "catalog:dev",
+    "lint-staged": "catalog:dev",
+    "simple-git-hooks": "catalog:dev",
+    "tsup": "catalog:dev",
+    "typescript": "catalog:dev"
   },
   "dependencies": {
-    "@eslint-types/import": "^2.29.1",
-    "@eslint-types/typescript-eslint": "^7.5.0",
-    "@eslint-types/unicorn": "^52.0.0",
-    "@stylistic/eslint-plugin": "^2.12.1",
-    "eslint-plugin-import-x": "^4.6.1",
-    "eslint-plugin-perfectionist": "^4.4.0",
-    "eslint-plugin-unicorn": "^56.0.1",
-    "globals": "^15.14.0",
-    "local-pkg": "^0.5.1",
-    "type-fest": "^4.30.2",
-    "typescript-eslint": "^8.18.2"
+    "@stylistic/eslint-plugin": "catalog:prod",
+    "eslint-plugin-import-x": "catalog:prod",
+    "eslint-plugin-perfectionist": "catalog:prod",
+    "eslint-plugin-unicorn": "catalog:prod",
+    "globals": "catalog:prod",
+    "local-pkg": "catalog:prod",
+    "type-fest": "catalog:prod",
+    "typescript-eslint": "catalog:prod"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

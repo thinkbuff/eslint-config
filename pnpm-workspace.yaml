@@ -1,0 +1,39 @@
+packages:
+  - .
+
+catalogs:
+  dev:
+    '@eslint/config-inspector': ^1.0.2
+    lint-staged: ^15.5.1
+    jiti: ^2.4.2
+    tsup: ^8.4.0
+    changelogen: ^0.6.1
+    simple-git-hooks: ^2.13.0
+    typescript: ^5.8.3
+  types:
+    '@types/node': ^22.15.3
+    '@eslint-types/import': ^2.29.1
+    '@eslint-types/typescript-eslint': ^7.5.0
+    '@eslint-types/unicorn': ^52.0.0
+  peer:
+    '@eslint-react/eslint-plugin': ^1.49.0
+    '@unocss/eslint-plugin': ^66.1.0
+    astro-eslint-parser: '^1.0.2'
+    eslint: ^9.26.0
+    eslint-plugin-astro: ^1.3.1
+    eslint-plugin-jsx-a11y: ^6.10.2
+    eslint-plugin-react-hooks: ^5.2.0
+    eslint-plugin-react-refresh: ^0.4.20
+  prod:
+    '@stylistic/eslint-plugin': ^4.2.0
+    eslint-plugin-perfectionist: ^4.12.3
+    eslint-plugin-unicorn: ^59.0.0
+    eslint-plugin-import-x: ^4.11.0
+    globals: ^16.0.0
+    local-pkg: ^1.1.1
+    type-fest: ^4.40.1
+    typescript-eslint: ^8.31.1
+
+onlyBuiltDependencies:
+  - esbuild
+  - simple-git-hooks

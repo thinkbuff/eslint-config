@@ -26,7 +26,6 @@ export async function stylistic(options: StylisticOptions = {}): Promise<ESLintF
   const StylisticPlugin = await resolveModule(import('@stylistic/eslint-plugin'));
 
   const config = StylisticPlugin.configs.customize({
-    flat: true,
     ...customizeOptions,
   });
 
