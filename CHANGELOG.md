@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.2.7
+
+[compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.6...v0.2.7)
+
+### 🚀 Enhancements
+
+- Add pnpm support and type generation ([521be3d](https://github.com/thinkbuff/eslint-config/commit/521be3d))
+
+### 🏡 Chore
+
+- Migrate to catalog-based dependency management and update pnpm to 10.10.0 ([b3c8486](https://github.com/thinkbuff/eslint-config/commit/b3c8486))
+
+### ❤️ Contributors
+
+- Eleven ([@eteplus](https://github.com/eteplus))
+
 ## v0.2.6
 
 [compare changes](https://github.com/thinkbuff/eslint-config/compare/v0.2.5...v0.2.6)
