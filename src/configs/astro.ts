@@ -1,63 +1,8 @@
-import type { ESLintFlatConfig, RuleEntry, RulesRecord } from '../types';
+import { GLOB_ASTRO } from '../globs';
+import type { ESLintFlatConfig } from '../types';
 import { resolveModule } from '../utils';
 
-import type { StylisticOptions, StylisticRules } from './stylistic';
-
-export interface AstroBaseRules {
-  'astro/no-conflict-set-directives': RuleEntry;
-  'astro/no-deprecated-astro-canonicalurl': RuleEntry;
-  'astro/no-deprecated-astro-fetchcontent': RuleEntry;
-  'astro/no-deprecated-astro-resolve': RuleEntry;
-  'astro/no-deprecated-getentrybyslug': RuleEntry;
-  'astro/no-unused-define-vars-in-style': RuleEntry;
-  'astro/valid-compile': RuleEntry;
-  'astro/no-set-html-directive': RuleEntry;
-  'astro/no-set-text-directive': RuleEntry;
-  'astro/no-unused-css-selector': RuleEntry;
-  'astro/prefer-class-list-directive': RuleEntry;
-  'astro/prefer-object-class-list': RuleEntry;
-  'astro/prefer-split-class-list': RuleEntry;
-  'astro/missing-client-only-directive-value': RuleEntry;
-  'astro/semi': RuleEntry;
-};
-
-export interface AstroJsxA11yRules {
-  'astro/jsx-a11y/alt-text': RuleEntry;
-  'astro/jsx-a11y/anchor-has-content': RuleEntry;
-  'astro/jsx-a11y/anchor-is-valid': RuleEntry;
-  'astro/jsx-a11y/aria-activedescendant-has-tabindex': RuleEntry;
-  'astro/jsx-a11y/aria-props': RuleEntry;
-  'astro/jsx-a11y/aria-proptypes': RuleEntry;
-  'astro/jsx-a11y/aria-role': RuleEntry;
-  'astro/jsx-a11y/aria-unsupported-elements': RuleEntry;
-  'astro/jsx-a11y/autocomplete-valid': RuleEntry;
-  'astro/jsx-a11y/click-events-have-key-events': RuleEntry;
-  'astro/jsx-a11y/control-has-associated-label': RuleEntry;
-  'astro/jsx-a11y/heading-has-content': RuleEntry;
-  'astro/jsx-a11y/html-has-lang': RuleEntry;
-  'astro/jsx-a11y/iframe-has-title': RuleEntry;
-  'astro/jsx-a11y/img-redundant-alt': RuleEntry;
-  'astro/jsx-a11y/interactive-supports-focus': RuleEntry;
-  'astro/jsx-a11y/label-has-for': 'off';
-  'astro/jsx-a11y/label-has-associated-control': RuleEntry;
-  'astro/jsx-a11y/media-has-caption': RuleEntry;
-  'astro/jsx-a11y/mouse-events-have-key-events': RuleEntry;
-  'astro/jsx-a11y/no-access-key': RuleEntry;
-  'astro/jsx-a11y/no-autofocus': RuleEntry;
-  'astro/jsx-a11y/no-distracting-elements': RuleEntry;
-  'astro/jsx-a11y/no-interactive-element-to-noninteractive-role': RuleEntry;
-  'astro/jsx-a11y/no-noninteractive-element-interactions': RuleEntry;
-  'astro/jsx-a11y/no-noninteractive-element-to-interactive-role': RuleEntry;
-  'astro/jsx-a11y/no-noninteractive-tabindex': RuleEntry;
-  'astro/jsx-a11y/no-redundant-roles': RuleEntry;
-  'astro/jsx-a11y/no-static-element-interactions': RuleEntry;
-  'astro/jsx-a11y/role-has-required-aria-props': RuleEntry;
-  'astro/jsx-a11y/role-supports-aria-props': RuleEntry;
-  'astro/jsx-a11y/scope': RuleEntry;
-  'astro/jsx-a11y/tabindex-no-positive': RuleEntry;
-};
-
-export type AstroRules = AstroBaseRules & AstroJsxA11yRules;
+import type { StylisticOptions } from './stylistic';
 
 export interface AstroOptions {
   /**
@@ -81,34 +26,22 @@ export interface AstroOptions {
   /**
    * @default {}
    */
-  overrides?: Partial<AstroRules & StylisticRules & RulesRecord>;
+  overrides?: ESLintFlatConfig['rules'];
 };
 
 export async function astro(
   options: AstroOptions = {},
-): Promise<ESLintFlatConfig<AstroRules & StylisticRules>[]> {
+): Promise<ESLintFlatConfig[]> {
   const {
     a11y = false,
-    files = ['**/*.astro', '*.astro'],
+    files = [GLOB_ASTRO],
     overrides = {},
     stylistic = true,
   } = options;
 
   const AstroPlugin = await resolveModule(import('eslint-plugin-astro'));
 
-  const rules = {
-    ...(stylistic
-      ? {
-          '@stylistic/indent': 'off',
-          '@stylistic/jsx-closing-tag-location': 'off',
-          '@stylistic/jsx-indent': 'off',
-          '@stylistic/jsx-one-expression-per-line': 'off',
-          '@stylistic/no-multiple-empty-lines': 'off',
-        }
-      : {}) as Partial<StylisticRules>,
-  };
-
-  const configs = [
+  const configs: ESLintFlatConfig[] = [
     ...AstroPlugin.configs['flat/recommended'],
     ...(a11y
       ? AstroPlugin.configs['flat/jsx-a11y-recommended']
@@ -125,7 +58,15 @@ export async function astro(
       name: 'thinkbuff:astro:rules',
       files,
       rules: {
-        ...rules,
+        ...stylistic
+          ? {
+              '@stylistic/indent': 'off',
+              '@stylistic/jsx-closing-tag-location': 'off',
+              '@stylistic/jsx-indent': 'off',
+              '@stylistic/jsx-one-expression-per-line': 'off',
+              '@stylistic/no-multiple-empty-lines': 'off',
+            }
+          : {},
         ...overrides,
       },
     },

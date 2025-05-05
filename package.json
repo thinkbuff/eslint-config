@@ -15,18 +15,22 @@
       "import": "./dist/index.js"
     }
   },
+  "imports": {
+    "#configs": "./src/configs/index.ts"
+  },
   "packageManager": "pnpm@10.10.0",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "clean": "rm -rf dist node_modules",
-    "build": "tsup --clean --dts",
+    "build": "pnpm typegen && tsup --clean --dts",
     "dev": "tsup --clean --watch & npx @eslint/config-inspector",
     "watch": "tsup --clean --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
+    "typegen": "tsx scripts/typegen.ts",
     "prepare": "simple-git-hooks",
     "prepack": "pnpm run build",
     "release": "changelogen --release --no-commit --no-tag"
@@ -77,9 +81,6 @@
     "@eslint-react/eslint-plugin": "catalog:peer",
     "@eslint/config-inspector": "catalog:dev",
     "@types/node": "catalog:types",
-    "@eslint-types/import": "catalog:types",
-    "@eslint-types/typescript-eslint": "catalog:types",
-    "@eslint-types/unicorn": "catalog:types",
     "@unocss/eslint-plugin": "catalog:peer",
     "astro-eslint-parser": "catalog:peer",
     "changelogen": "catalog:dev",
@@ -88,21 +89,26 @@
     "eslint-plugin-jsx-a11y": "catalog:peer",
     "eslint-plugin-react-hooks": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
+    "eslint-typegen": "catalog:dev",
     "jiti": "catalog:dev",
     "lint-staged": "catalog:dev",
     "simple-git-hooks": "catalog:dev",
     "tsup": "catalog:dev",
+    "tsx": "catalog:dev",
     "typescript": "catalog:dev"
   },
   "dependencies": {
     "@stylistic/eslint-plugin": "catalog:prod",
     "eslint-plugin-import-x": "catalog:prod",
     "eslint-plugin-perfectionist": "catalog:prod",
+    "eslint-plugin-pnpm": "catalog:prod",
     "eslint-plugin-unicorn": "catalog:prod",
     "globals": "catalog:prod",
+    "jsonc-eslint-parser": "catalog:prod",
     "local-pkg": "catalog:prod",
     "type-fest": "catalog:prod",
-    "typescript-eslint": "catalog:prod"
+    "typescript-eslint": "catalog:prod",
+    "yaml-eslint-parser": "catalog:prod"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

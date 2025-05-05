@@ -1,7 +1,8 @@
 import { isPackageExists } from 'local-pkg';
+import globals from 'globals';
 
 import { GLOB_JSX, GLOB_TSX } from '../globs';
-import type { ESLintFlatConfig, RulesRecord } from '../types';
+import type { ESLintFlatConfig } from '../types';
 import { resolveModule } from '../utils';
 
 export interface ReactOptions {
@@ -27,7 +28,7 @@ export interface ReactOptions {
    *
    * @default {}
    */
-  overrides?: Partial<RulesRecord>;
+  overrides?: ESLintFlatConfig['rules'];
 }
 
 const ReactRefreshAllowConstantExportPackages = ['vite'];
@@ -46,6 +47,8 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
 
   const plugins = ReactPlugin.configs.all.plugins;
 
+  const enableA11y = !!(a11y && JsxA11yPlugin);
+
   const rules = {
     ...Object.fromEntries(
       Object.entries(ReactPlugin.configs.recommended.rules).map(([name, value]) => [
@@ -59,7 +62,6 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
       ]),
     ),
     ...ReactHookPlugin.configs.recommended.rules,
-    ...(a11y && JsxA11yPlugin ? JsxA11yPlugin.configs[a11y].rules : {}),
   };
 
   return [
@@ -72,6 +74,7 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
             jsx: true,
           },
         },
+        sourceType: 'module',
       },
       plugins: {
         'react': plugins['@eslint-react'],
@@ -81,7 +84,6 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
         'react-naming-convention': plugins['@eslint-react/naming-convention'],
         'react-refresh': ReactRefreshPlugin,
         'react-web-api': plugins['@eslint-react/web-api'],
-        ...(a11y && JsxA11yPlugin ? { 'jsx-a11y': JsxA11yPlugin } : {}),
       },
       rules: {
         ...rules,
@@ -103,6 +105,20 @@ export async function react(options: ReactOptions = {}): Promise<ESLintFlatConfi
         },
       },
     },
+    ...enableA11y
+      ? [{
+          name: 'thinkbuff:react:a11y',
+          files,
+          ...JsxA11yPlugin.flatConfigs[a11y],
+          languageOptions: {
+            ...JsxA11yPlugin.flatConfigs[a11y].languageOptions,
+            globals: {
+              ...globals.serviceworker,
+              ...globals.browser,
+            },
+          },
+        }]
+      : [],
     {
       name: 'thinkbuff:react:disable-rules-of-hooks',
       files: ['**/.storybook/*.@(ts|tsx|js|jsx|mjs|cjs)', '**/*.@(stories|story).@(ts|tsx|js|jsx|mjs|cjs)'],

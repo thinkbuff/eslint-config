@@ -1,16 +1,13 @@
-import type { RuleOptions } from '@eslint-types/unicorn/types';
 import UnicornPlugin from 'eslint-plugin-unicorn';
 
 import type { ESLintFlatConfig } from '../types';
 
-export type UnicornRules = RuleOptions;
-
-export async function unicorn(): Promise<ESLintFlatConfig<UnicornRules>[]> {
-  const rules = UnicornPlugin.configs['flat/recommended'].rules;
+export async function unicorn(): Promise<ESLintFlatConfig[]> {
+  const rules = UnicornPlugin.configs.recommended.rules;
   return [
     {
+      ...UnicornPlugin.configs.recommended,
       name: 'thinkbuff:unicorn',
-      ...UnicornPlugin.configs['flat/recommended'],
       rules: {
         ...rules,
         'unicorn/filename-case': [
@@ -24,6 +21,7 @@ export async function unicorn(): Promise<ESLintFlatConfig<UnicornRules>[]> {
           },
         ],
         'unicorn/better-regex': 'off',
+        'unicorn/no-abusive-eslint-disable': 'off',
         'unicorn/no-array-reduce': 'off',
         'unicorn/no-null': 'off',
         'unicorn/prefer-add-event-listener': 'off',

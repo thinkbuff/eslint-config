@@ -16,6 +16,7 @@ async function defineFlatConfigAsync(...args) {
 }
 
 export default defineFlatConfigAsync({
+  pnpm: true,
   extends: [
     {
       files: ['src/**/*.ts'],

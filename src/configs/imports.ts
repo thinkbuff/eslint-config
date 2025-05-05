@@ -1,12 +1,9 @@
-import type { RuleOptions as ImportRuleOptions } from '@eslint-types/import/types';
 import * as ImportPlugin from 'eslint-plugin-import-x';
 
 import { GLOB_SRC, GLOB_SRC_EXT } from '../globs';
 import type { ESLintFlatConfig } from '../types';
 
-export type ImportRules = ImportRuleOptions;
-
-export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
+export async function imports(): Promise<ESLintFlatConfig[]> {
   return [
     {
       name: 'thinkbuff:imports',
@@ -37,14 +34,14 @@ export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
             'pathGroupsExcludedImportTypes': ['type'],
           },
         ],
-      } as unknown as Partial<ImportRules>,
+      },
     },
     {
       name: 'thinkbuff:imports:disable-no-default-export',
       files: [
         `**/*config*.${GLOB_SRC_EXT}`,
         `**/{views,pages,routes,middleware,plugins,api}/${GLOB_SRC}`,
-        `**/{index,vite,esbuild,rollup,rolldown,webpack,rspack}.ts`,
+        '**/{index,vite,esbuild,rollup,rolldown,webpack,rspack}.ts',
         '**/*.d.ts',
         '**/.storybook/*.@(ts|tsx|js|jsx|mjs|cjs)',
         '**/*.@(stories|story).@(ts|tsx|js|jsx|mjs|cjs)',
@@ -54,7 +51,7 @@ export async function imports(): Promise<ESLintFlatConfig<ImportRules>[]> {
       },
       rules: {
         'import/no-default-export': 'off',
-      } as unknown as Partial<ImportRules>,
+      },
     },
   ];
 }

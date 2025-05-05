@@ -1,5 +1,7 @@
 import type { Linter, ESLint } from 'eslint';
 
+import type { RuleOptions } from './typegen';
+
 export type Awaitable<T> = T | Promise<T>;
 
 export type RulesRecord = Linter.RulesRecord;
@@ -8,17 +10,13 @@ export type RuleEntry = Linter.RuleEntry;
 
 export type ESlintPlugin = ESLint.Plugin;
 
-export interface ESLintFlatConfig<Rules = Linter.RulesRecord> extends Omit<Linter.FlatConfig, 'rules' | 'plugins'> {
+export type Rules = RuleOptions & {};
+
+export type ESLintFlatConfig = Omit<Linter.Config<RulesRecord & Rules>, 'plugins'> & {
   /**
    * Custom name of each config item
    */
   name?: string;
-  /**
-   * An object containing the configured rules. When `files` or `ignores` are specified, these rule configurations are only available to the matching files.
-   *
-   * @see [Configuring rules](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#configuring-rules)
-   */
-  rules?: Partial<Rules>;
 
   // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
   /**
@@ -27,4 +25,6 @@ export interface ESLintFlatConfig<Rules = Linter.RulesRecord> extends Omit<Linte
    * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
   plugins?: Record<string, any>;
-}
+};
+
+export type { ConfigNames } from './typegen';

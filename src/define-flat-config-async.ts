@@ -11,30 +11,16 @@ import {
   javascript,
   typescript,
   perfectionist,
+  pnpm,
   type StylisticOptions,
   type AstroOptions,
-  type StylisticRules,
-  type AstroRules,
-  type UnicornRules,
   type UnocssOptions,
-  type UnocssRules,
-  type ImportRules,
   type ReactOptions,
   type TypescriptOptions,
-  type TypescriptESlintRules,
   type PerfectionistOptions,
 } from './configs';
-import type { Awaitable, ESLintFlatConfig, RulesRecord } from './types';
+import type { Awaitable, ESLintFlatConfig } from './types';
 import { resolveOptions } from './utils';
-
-export type Rules =
-  | RulesRecord
-  | StylisticRules
-  | TypescriptESlintRules
-  | AstroRules
-  | UnicornRules
-  | UnocssRules
-  | ImportRules;
 
 export interface DefineFlatConfigAsyncOptions {
   /**
@@ -89,11 +75,21 @@ export interface DefineFlatConfigAsyncOptions {
    */
   perfectionist?: boolean | PerfectionistOptions;
   /**
+   * Enable pnpm (workspace/catalogs) support.
+   *
+   * Currently it's disabled by default, as it's still experimental.
+   * In the future it will be smartly enabled based on the project usage.
+   *
+   * @see https://github.com/antfu/pnpm-workspace-utils
+   * @default false
+   */
+  pnpm?: boolean;
+  /**
    * Additional ESlint Flat configuration.
    *
    * @default []
    */
-  extends?: Awaitable<ESLintFlatConfig<Rules>>[];
+  extends?: Awaitable<ESLintFlatConfig>[];
 }
 
 /**
@@ -106,7 +102,7 @@ export async function defineFlatConfigAsync(options: DefineFlatConfigAsyncOption
   const enableTypescript = options.typescript !== false && isPackageExists('typescript');
   const stylisticOptions = resolveOptions(options.stylistic, {});
 
-  const configs: Awaitable<ESLintFlatConfig<Rules>[]>[] = [ignores(), javascript(), unicorn(), imports()];
+  const configs: Awaitable<ESLintFlatConfig[]>[] = [ignores(), javascript(), unicorn(), imports()];
 
   if (stylisticOptions) {
     configs.push(stylistic(stylisticOptions));
@@ -130,6 +126,10 @@ export async function defineFlatConfigAsync(options: DefineFlatConfigAsyncOption
 
   if (options.perfectionist !== false) {
     configs.push(perfectionist(resolveOptions(options.perfectionist)));
+  }
+
+  if (options.pnpm) {
+    configs.push(pnpm());
   }
 
   const values = await Promise.all([...configs, ...(Array.isArray(options.extends) ? options.extends : [])]);

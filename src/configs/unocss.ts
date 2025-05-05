@@ -1,17 +1,11 @@
-import type { ESLintFlatConfig, RuleEntry } from '../types';
+import type { ESLintFlatConfig } from '../types';
 import { resolveModule } from '../utils';
 
-export interface UnocssRules {
-  'unocss/order': RuleEntry;
-  'unocss/order-attributify': RuleEntry;
-  'unocss/blocklist': RuleEntry;
-}
-
 export interface UnocssOptions {
-  overrides?: Partial<UnocssRules>;
+  overrides?: ESLintFlatConfig['rules'];
 }
 
-export async function unocss(options: UnocssOptions = {}): Promise<ESLintFlatConfig<UnocssRules>[]> {
+export async function unocss(options: UnocssOptions = {}): Promise<ESLintFlatConfig[]> {
   const { overrides = {} } = options;
 
   const { configs } = await resolveModule(import('@unocss/eslint-plugin'));

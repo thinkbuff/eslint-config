@@ -8,3 +8,4 @@ export * from './unocss';
 export * from './imports';
 export * from './typescript';
 export * from './perfectionist';
+export * from './pnpm';

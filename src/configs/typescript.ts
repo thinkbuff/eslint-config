@@ -1,13 +1,9 @@
-import type { RuleOptions } from '@eslint-types/typescript-eslint/types';
-
-import type { ESLintFlatConfig, RulesRecord } from '../types';
+import type { ESLintFlatConfig } from '../types';
 import { GLOB_TS, GLOB_TSX } from '../globs';
 import { resolveModule } from '../utils';
 
-export type TypescriptESlintRules = RuleOptions;
-
 export interface TypescriptOptions {
-  overrides?: Partial<TypescriptESlintRules>;
+  overrides?: ESLintFlatConfig['rules'];
 }
 
 /**
@@ -16,44 +12,20 @@ export interface TypescriptOptions {
  * @param options - optional options for customization
  * @return an array of ESLint configurations for TypeScript
  */
-export async function typescript(options: TypescriptOptions = {}): Promise<ESLintFlatConfig<TypescriptESlintRules>[]> {
+export async function typescript(options: TypescriptOptions = {}): Promise<ESLintFlatConfig[]> {
   const { overrides = {} } = options;
 
   const TSESLint = await resolveModule(import('typescript-eslint'));
 
-  const rules: RulesRecord = {};
-  for (const config of TSESLint.configs.recommended) {
-    if (!config.rules) {
-      continue;
-    }
-
-    for (const [key, value] of Object.entries(config.rules)) {
-      if (!value) {
-        continue;
-      }
-      rules[key] = value;
-    }
-  }
-
   return [
+    ...TSESLint.configs.recommended.map(config => ({
+      ...config,
+      name: `thinkbuff:typescript:${config.name?.split?.('/').at(-1)}`,
+    })) as ESLintFlatConfig[],
     {
-      name: 'thinkbuff:typescript',
+      name: 'thinkbuff:typescript:custom',
       files: [GLOB_TS, GLOB_TSX],
-      languageOptions: {
-        parser: TSESLint.parser,
-        parserOptions: {
-          ecmaFeatures: {
-            jsx: true,
-          },
-          sourceType: 'module',
-        },
-        sourceType: 'module',
-      },
-      plugins: {
-        '@typescript-eslint': TSESLint.plugin,
-      },
       rules: {
-        ...rules,
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/consistent-type-assertions': [
@@ -96,5 +68,5 @@ export async function typescript(options: TypescriptOptions = {}): Promise<ESLin
         '@typescript-eslint/no-require-imports': 'off',
       },
     },
-  ] as ESLintFlatConfig<TypescriptESlintRules>[];
+  ];
 }
